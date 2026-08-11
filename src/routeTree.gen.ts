@@ -10,17 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as GoalsRouteImport } from './routes/goals'
 import { Route as HabitsRouteImport } from './routes/habits'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as KnowledgeRouteImport } from './routes/knowledge'
 import { Route as NotesRouteImport } from './routes/notes'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as TravelRouteImport } from './routes/travel'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CalendarRoute = CalendarRouteImport.update({
@@ -53,6 +61,16 @@ const NotesRoute = NotesRouteImport.update({
   path: '/notes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TravelRoute = TravelRouteImport.update({
   id: '/travel',
   path: '/travel',
@@ -61,76 +79,97 @@ const TravelRoute = TravelRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
   '/journal': typeof JournalRoute
   '/knowledge': typeof KnowledgeRoute
   '/notes': typeof NotesRoute
+  '/profile': typeof ProfileRoute
+  '/settings': typeof SettingsRoute
   '/travel': typeof TravelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
   '/journal': typeof JournalRoute
   '/knowledge': typeof KnowledgeRoute
   '/notes': typeof NotesRoute
+  '/profile': typeof ProfileRoute
+  '/settings': typeof SettingsRoute
   '/travel': typeof TravelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
   '/journal': typeof JournalRoute
   '/knowledge': typeof KnowledgeRoute
   '/notes': typeof NotesRoute
+  '/profile': typeof ProfileRoute
+  '/settings': typeof SettingsRoute
   '/travel': typeof TravelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/calendar'
     | '/goals'
     | '/habits'
     | '/journal'
     | '/knowledge'
     | '/notes'
+    | '/profile'
+    | '/settings'
     | '/travel'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/calendar'
     | '/goals'
     | '/habits'
     | '/journal'
     | '/knowledge'
     | '/notes'
+    | '/profile'
+    | '/settings'
     | '/travel'
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/calendar'
     | '/goals'
     | '/habits'
     | '/journal'
     | '/knowledge'
     | '/notes'
+    | '/profile'
+    | '/settings'
     | '/travel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   CalendarRoute: typeof CalendarRoute
   GoalsRoute: typeof GoalsRoute
   HabitsRoute: typeof HabitsRoute
   JournalRoute: typeof JournalRoute
   KnowledgeRoute: typeof KnowledgeRoute
   NotesRoute: typeof NotesRoute
+  ProfileRoute: typeof ProfileRoute
+  SettingsRoute: typeof SettingsRoute
   TravelRoute: typeof TravelRoute
 }
 
@@ -141,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/calendar': {
@@ -185,6 +231,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel': {
       id: '/travel'
       path: '/travel'
@@ -197,12 +257,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   CalendarRoute: CalendarRoute,
   GoalsRoute: GoalsRoute,
   HabitsRoute: HabitsRoute,
   JournalRoute: JournalRoute,
   KnowledgeRoute: KnowledgeRoute,
   NotesRoute: NotesRoute,
+  ProfileRoute: ProfileRoute,
+  SettingsRoute: SettingsRoute,
   TravelRoute: TravelRoute,
 }
 export const routeTree = rootRouteImport
