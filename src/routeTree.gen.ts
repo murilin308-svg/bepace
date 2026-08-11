@@ -12,7 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as GoalsRouteImport } from './routes/goals'
+import { Route as HabitsRouteImport } from './routes/habits'
+import { Route as JournalRouteImport } from './routes/journal'
+import { Route as KnowledgeRouteImport } from './routes/knowledge'
 import { Route as NotesRouteImport } from './routes/notes'
+import { Route as TravelRouteImport } from './routes/travel'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,9 +33,29 @@ const GoalsRoute = GoalsRouteImport.update({
   path: '/goals',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HabitsRoute = HabitsRouteImport.update({
+  id: '/habits',
+  path: '/habits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalRoute = JournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeRoute = KnowledgeRouteImport.update({
+  id: '/knowledge',
+  path: '/knowledge',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NotesRoute = NotesRouteImport.update({
   id: '/notes',
   path: '/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelRoute = TravelRouteImport.update({
+  id: '/travel',
+  path: '/travel',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -39,34 +63,75 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/goals': typeof GoalsRoute
+  '/habits': typeof HabitsRoute
+  '/journal': typeof JournalRoute
+  '/knowledge': typeof KnowledgeRoute
   '/notes': typeof NotesRoute
+  '/travel': typeof TravelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/goals': typeof GoalsRoute
+  '/habits': typeof HabitsRoute
+  '/journal': typeof JournalRoute
+  '/knowledge': typeof KnowledgeRoute
   '/notes': typeof NotesRoute
+  '/travel': typeof TravelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/goals': typeof GoalsRoute
+  '/habits': typeof HabitsRoute
+  '/journal': typeof JournalRoute
+  '/knowledge': typeof KnowledgeRoute
   '/notes': typeof NotesRoute
+  '/travel': typeof TravelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calendar' | '/goals' | '/notes'
+  fullPaths:
+    | '/'
+    | '/calendar'
+    | '/goals'
+    | '/habits'
+    | '/journal'
+    | '/knowledge'
+    | '/notes'
+    | '/travel'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calendar' | '/goals' | '/notes'
-  id: '__root__' | '/' | '/calendar' | '/goals' | '/notes'
+  to:
+    | '/'
+    | '/calendar'
+    | '/goals'
+    | '/habits'
+    | '/journal'
+    | '/knowledge'
+    | '/notes'
+    | '/travel'
+  id:
+    | '__root__'
+    | '/'
+    | '/calendar'
+    | '/goals'
+    | '/habits'
+    | '/journal'
+    | '/knowledge'
+    | '/notes'
+    | '/travel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalendarRoute: typeof CalendarRoute
   GoalsRoute: typeof GoalsRoute
+  HabitsRoute: typeof HabitsRoute
+  JournalRoute: typeof JournalRoute
+  KnowledgeRoute: typeof KnowledgeRoute
   NotesRoute: typeof NotesRoute
+  TravelRoute: typeof TravelRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,11 +157,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GoalsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/habits': {
+      id: '/habits'
+      path: '/habits'
+      fullPath: '/habits'
+      preLoaderRoute: typeof HabitsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal': {
+      id: '/journal'
+      path: '/journal'
+      fullPath: '/journal'
+      preLoaderRoute: typeof JournalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge': {
+      id: '/knowledge'
+      path: '/knowledge'
+      fullPath: '/knowledge'
+      preLoaderRoute: typeof KnowledgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/notes': {
       id: '/notes'
       path: '/notes'
       fullPath: '/notes'
       preLoaderRoute: typeof NotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel': {
+      id: '/travel'
+      path: '/travel'
+      fullPath: '/travel'
+      preLoaderRoute: typeof TravelRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -106,7 +199,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalendarRoute: CalendarRoute,
   GoalsRoute: GoalsRoute,
+  HabitsRoute: HabitsRoute,
+  JournalRoute: JournalRoute,
+  KnowledgeRoute: KnowledgeRoute,
   NotesRoute: NotesRoute,
+  TravelRoute: TravelRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
