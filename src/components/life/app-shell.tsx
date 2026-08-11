@@ -45,7 +45,7 @@ function NavList({
   items: readonly { to: string; label: string; icon: typeof Gauge }[];
   collapsed: boolean;
   pathname: string;
-  onNavigate?: () => void;
+  onNavigate?: (() => void) | undefined;
 }) {
   return (
     <ul className="space-y-1">
@@ -83,7 +83,7 @@ function SidebarBody({
 }: {
   collapsed: boolean;
   pathname: string;
-  onNavigate?: () => void;
+  onNavigate?: (() => void) | undefined;
 }) {
   return (
     <div className="flex h-full flex-col">
