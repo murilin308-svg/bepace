@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { ArrowUpRight, Check, Clock } from "lucide-react";
 import { AppShell } from "@/components/life/app-shell";
 import {
@@ -42,14 +43,22 @@ export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
 });
 
-const today = new Date();
-const dayLabel = today.toLocaleDateString("en-US", {
-  weekday: "long",
-  month: "long",
-  day: "numeric",
-});
+function useDayLabel() {
+  const [label, setLabel] = useState("");
+  useEffect(() => {
+    setLabel(
+      new Date().toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+      }),
+    );
+  }, []);
+  return label;
+}
 
 function Dashboard() {
+  const dayLabel = useDayLabel();
   const todayEvents = events.filter((e) => e.day <= 1).slice(0, 4);
   const doneHabits = habits.filter((h) => h.doneToday).length;
 
@@ -57,7 +66,7 @@ function Dashboard() {
     <AppShell>
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 pb-8 sm:flex sm:justify-between">
         <div className="min-w-0">
-          <p className="eyebrow">{dayLabel}</p>
+          <p className="eyebrow min-h-4">{dayLabel}</p>
           <h1 className="mt-2 text-display text-3xl leading-none sm:text-[2.6rem]">
             Good afternoon, {user.name.split(" ")[0]}
           </h1>

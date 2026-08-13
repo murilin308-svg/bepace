@@ -170,7 +170,7 @@ function AuthPage() {
             </p>
 
             <p className="mt-4 text-center text-[11px] text-muted-foreground">
-              <Link to="/" className="underline-offset-4 hover:underline">
+              <Link to="/dashboard" className="underline-offset-4 hover:underline">
                 Preview the dashboard
               </Link>
             </p>
