@@ -22,7 +22,7 @@ import {
   weekPlan,
 } from "@/lib/life-os";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
       { title: "Life OS — Your Personal Command Center" },
