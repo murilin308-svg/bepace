@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import logo from "@/assets/life-os-logo.jpg.asset.json";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -38,9 +39,11 @@ function AuthPage() {
         {/* Left — identity & concept */}
         <div className="relative flex min-h-[420px] flex-col justify-between p-8 sm:p-12">
           <div className="flex items-center gap-3">
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-accent-orange text-sm font-bold text-black">
-              L
-            </span>
+            <img
+              src={logo.url}
+              alt="Life OS logo"
+              className="h-9 w-9 rounded-full object-contain invert"
+            />
             <span className="text-sm font-semibold tracking-[0.18em] uppercase">Life OS</span>
           </div>
 
