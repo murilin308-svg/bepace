@@ -11,6 +11,12 @@ import {
   Target,
 } from "lucide-react";
 import logo from "@/assets/life-os-logo.jpg.asset.json";
+import imgGoals from "@/assets/card-goals.jpg";
+import imgHabits from "@/assets/card-habits.jpg";
+import imgCalendar from "@/assets/card-calendar.jpg";
+import imgNotes from "@/assets/card-notes.jpg";
+import imgTravel from "@/assets/card-travel.jpg";
+import imgJournal from "@/assets/card-journal.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,31 +47,37 @@ const modules = [
     icon: Target,
     name: "Goals",
     line: "Vision broken into quarters, projects and today's next move.",
+    image: imgGoals,
   },
   {
     icon: Repeat2,
     name: "Habits",
     line: "Streaks, consistency rings and the discipline behind the score.",
+    image: imgHabits,
   },
   {
     icon: CalendarDays,
     name: "Calendar",
     line: "Day, week, month and year — one continuous sense of time.",
+    image: imgCalendar,
   },
   {
     icon: NotebookPen,
     name: "Notes",
     line: "A calm three-pane workspace for everything you capture.",
+    image: imgNotes,
   },
   {
     icon: Globe2,
     name: "Travel",
     line: "Countries lived, flown and dreamed of, mapped on a globe.",
+    image: imgTravel,
   },
   {
     icon: BookOpen,
     name: "Journal",
     line: "Mood, energy and reflection tracked day after day.",
+    image: imgJournal,
   },
 ] as const;
 
@@ -92,10 +104,10 @@ function Cover() {
             Sign in
           </Link>
           <Link
-            to="/dashboard"
+            to="/auth"
             className="rounded-xl bg-accent-orange px-3.5 py-2 text-xs font-semibold text-black transition-opacity hover:opacity-90"
           >
-            Live demo
+            Buy
           </Link>
         </div>
       </header>
@@ -118,7 +130,7 @@ function Cover() {
           transition={{ duration: 0.6, ease }}
           className="eyebrow"
         >
-          Personal operating system · presentation
+          Personal operating system
         </motion.p>
 
         <motion.h1
@@ -150,17 +162,17 @@ function Cover() {
           className="mt-9 flex flex-wrap items-center gap-3"
         >
           <Link
-            to="/dashboard"
+            to="/auth"
             className="group inline-flex items-center gap-2 rounded-xl bg-accent-orange px-5 py-3 text-xs font-semibold text-black transition-opacity hover:opacity-90"
           >
-            Enter the demo
+            Buy Life OS
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <Link
             to="/auth"
             className="inline-flex items-center gap-2 rounded-xl border border-border bg-surface-1 px-5 py-3 text-xs font-medium transition-colors hover:border-foreground/25"
           >
-            Create an account
+            Sign in
           </Link>
         </motion.div>
 
@@ -207,13 +219,26 @@ function Cover() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.55, delay: (i % 3) * 0.06, ease }}
               whileHover={{ y: -4 }}
-              className="layer-card group p-6"
+              className="layer-card group overflow-hidden"
             >
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-surface-3 text-accent-orange transition-colors group-hover:bg-accent-orange group-hover:text-black">
-                <m.icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
-              </span>
-              <h3 className="mt-5 text-sm font-semibold tracking-tight">{m.name}</h3>
-              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{m.line}</p>
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img
+                  src={m.image}
+                  alt={`${m.name} module`}
+                  loading="lazy"
+                  width={1024}
+                  height={768}
+                  className="h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-[1.04] group-hover:opacity-100"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-surface-1 via-surface-1/20 to-transparent" />
+                <span className="absolute top-4 left-4 grid h-9 w-9 place-items-center rounded-xl border border-border bg-surface-0/70 text-accent-orange backdrop-blur-md">
+                  <m.icon className="h-[17px] w-[17px]" strokeWidth={1.6} />
+                </span>
+              </div>
+              <div className="p-6 pt-4">
+                <h3 className="text-sm font-semibold tracking-tight">{m.name}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{m.line}</p>
+              </div>
             </motion.article>
           ))}
 
@@ -235,15 +260,18 @@ function Cover() {
             </div>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
-                to="/dashboard"
+                to="/auth"
                 className="inline-flex items-center gap-2 rounded-xl bg-accent-orange px-4 py-2.5 text-xs font-semibold text-black transition-opacity hover:opacity-90"
               >
-                See the dashboard
+                Buy Life OS
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
-              <span className="text-[11px] text-muted-foreground">
-                Demo data · no account needed
-              </span>
+              <Link
+                to="/auth"
+                className="text-[11px] text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+              >
+                Already have an account? Sign in
+              </Link>
             </div>
           </motion.div>
         </div>
