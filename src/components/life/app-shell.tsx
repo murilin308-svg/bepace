@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 import { user } from "@/lib/life-os";
 
 const nav = [
-  { to: "/", label: "Dashboard", icon: Gauge },
+  { to: "/dashboard", label: "Dashboard", icon: Gauge },
   { to: "/notes", label: "Notes", icon: NotebookPen },
   { to: "/calendar", label: "Calendar", icon: CalendarDays },
   { to: "/goals", label: "Goals", icon: Target },
