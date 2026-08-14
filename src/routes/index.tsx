@@ -104,7 +104,7 @@ function Cover() {
             Sign in
           </Link>
           <Link
-            to="/auth"
+            to="/pricing"
             className="rounded-xl bg-accent-orange px-3.5 py-2 text-xs font-semibold text-black transition-opacity hover:opacity-90"
           >
             Buy
@@ -162,7 +162,7 @@ function Cover() {
           className="mt-9 flex flex-wrap items-center gap-3"
         >
           <Link
-            to="/auth"
+            to="/pricing"
             className="group inline-flex items-center gap-2 rounded-xl bg-accent-orange px-5 py-3 text-xs font-semibold text-black transition-opacity hover:opacity-90"
           >
             Buy Life OS
@@ -260,7 +260,7 @@ function Cover() {
             </div>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
-                to="/auth"
+                to="/pricing"
                 className="inline-flex items-center gap-2 rounded-xl bg-accent-orange px-4 py-2.5 text-xs font-semibold text-black transition-opacity hover:opacity-90"
               >
                 Buy Life OS
