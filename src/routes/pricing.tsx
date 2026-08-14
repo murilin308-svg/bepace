@@ -108,67 +108,76 @@ function PricingPage() {
         </nav>
       </header>
 
-      <section className="relative mx-auto w-full max-w-6xl overflow-hidden px-5 pb-24 sm:px-8">
+      <section className="relative mx-auto w-full max-w-5xl overflow-hidden px-5 pb-24 sm:px-8">
+        {/* Watermark mark behind title and cards */}
+        <motion.img
+          src={logo.url}
+          alt=""
+          aria-hidden
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 0.055, scale: 1 }}
+          transition={{ duration: 1.8, ease }}
+          className="pointer-events-none absolute top-16 left-1/2 w-[620px] max-w-none -translate-x-1/2 rounded-full object-contain invert select-none sm:w-[820px]"
+        />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-surface-0 to-transparent"
+        />
+
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease }}
-          className="pt-10 text-center text-display text-6xl leading-[0.95] tracking-tight sm:pt-16 sm:text-[8rem]"
+          className="relative pt-12 text-center text-display text-5xl leading-[0.95] tracking-tight sm:pt-16 sm:text-[7rem]"
         >
           Pricing
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.12, ease }}
-          className="mx-auto -mt-2 max-w-lg text-center text-sm leading-relaxed text-muted-foreground sm:-mt-6"
-        >
-          Uma mistura completa de tudo que você precisa para chegar onde quer — em alta performance.
-        </motion.p>
-
-        <div className="mt-12 grid gap-4 sm:grid-cols-2">
+        <div className="relative mx-auto -mt-6 grid max-w-3xl gap-3 sm:-mt-14 sm:grid-cols-2">
           {plans.map((plan, i) => (
             <motion.article
               key={plan.id}
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 + i * 0.1, ease }}
-              className={
+              className={`relative overflow-hidden rounded-2xl border p-5 backdrop-blur-xl sm:p-6 ${
                 plan.featured
-                  ? "layer-card-raised relative overflow-hidden p-7 sm:p-9"
-                  : "layer-card relative overflow-hidden p-7 sm:p-9"
-              }
+                  ? "border-foreground/12 bg-[oklch(0.17_0_0/0.72)] shadow-[0_40px_90px_-50px_oklch(0_0_0/1)]"
+                  : "border-hairline bg-[oklch(0.13_0_0/0.62)]"
+              }`}
             >
-              {plan.featured ? (
-                <span className="absolute top-6 right-6 rounded-full border border-accent-orange/40 px-2.5 py-1 text-[10px] tracking-[0.14em] text-accent-orange uppercase">
-                  Mais escolhido
-                </span>
-              ) : null}
-
-              <p className="eyebrow">{plan.name}</p>
-
-              <div className="mt-5 flex items-end gap-1.5">
-                <span className="text-sm text-muted-foreground">R$</span>
-                <span className="text-display text-4xl leading-none sm:text-5xl">{plan.price}</span>
-                <span className="pb-1 text-sm text-muted-foreground">/mês</span>
+              <div className="flex items-center justify-between">
+                <p className="eyebrow">{plan.name}</p>
+                {plan.featured ? (
+                  <span className="rounded-full border border-accent-orange/40 px-2 py-0.5 text-[9px] tracking-[0.12em] text-accent-orange uppercase">
+                    Popular
+                  </span>
+                ) : null}
               </div>
 
-              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{plan.tagline}</p>
+              <div className="mt-3 flex items-end gap-1">
+                <span className="pb-1 text-xs text-muted-foreground">R$</span>
+                <span className="text-display text-3xl leading-none">{plan.price}</span>
+                <span className="pb-1 text-xs text-muted-foreground">/mês</span>
+              </div>
 
-              <ul className="mt-8 space-y-3">
+              <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
+                {plan.tagline}
+              </p>
+
+              <ul className="mt-5 space-y-2">
                 {plan.features.map((f) => (
-                  <li key={f.label} className="flex items-center gap-3 text-xs">
+                  <li key={f.label} className="flex items-center gap-2.5 text-[11px]">
                     <span
-                      className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border ${
+                      className={`grid h-4 w-4 shrink-0 place-items-center rounded-full border ${
                         f.on
                           ? "border-accent-orange/40 text-accent-orange"
-                          : "border-hairline text-muted-foreground/50"
+                          : "border-hairline text-muted-foreground/40"
                       }`}
                     >
-                      {f.on ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                      {f.on ? <Check className="h-2.5 w-2.5" /> : <X className="h-2.5 w-2.5" />}
                     </span>
-                    <span className={f.on ? "text-foreground/90" : "text-muted-foreground/60"}>
+                    <span className={f.on ? "text-foreground/85" : "text-muted-foreground/50"}>
                       {f.label}
                     </span>
                   </li>
@@ -177,23 +186,24 @@ function PricingPage() {
 
               <Link
                 to="/auth"
-                className={`mt-9 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-xs font-semibold transition-opacity hover:opacity-90 ${
+                className={`mt-6 flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-[11px] font-semibold transition-opacity hover:opacity-90 ${
                   plan.featured
                     ? "bg-accent-orange text-black"
-                    : "border border-border bg-surface-2 text-foreground"
+                    : "border border-border bg-[oklch(0.2_0_0/0.7)] text-foreground"
                 }`}
               >
                 Começar agora
-                <ArrowRight className="h-3.5 w-3.5" />
+                <ArrowRight className="h-3 w-3" />
               </Link>
             </motion.article>
           ))}
         </div>
 
-        <p className="mt-8 text-center text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+        <p className="relative mt-7 text-center text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
           Cancele quando quiser · Pagamento em reais
         </p>
       </section>
+
 
       <footer className="border-t border-hairline">
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 text-[11px] tracking-[0.14em] text-muted-foreground uppercase sm:px-8">
