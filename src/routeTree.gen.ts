@@ -18,6 +18,7 @@ import { Route as HabitsRouteImport } from './routes/habits'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as KnowledgeRouteImport } from './routes/knowledge'
 import { Route as NotesRouteImport } from './routes/notes'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as TravelRouteImport } from './routes/travel'
@@ -67,6 +68,11 @@ const NotesRoute = NotesRouteImport.update({
   path: '/notes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProfileRoute = ProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/journal': typeof JournalRoute
   '/knowledge': typeof KnowledgeRoute
   '/notes': typeof NotesRoute
+  '/pricing': typeof PricingRoute
   '/profile': typeof ProfileRoute
   '/settings': typeof SettingsRoute
   '/travel': typeof TravelRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/journal': typeof JournalRoute
   '/knowledge': typeof KnowledgeRoute
   '/notes': typeof NotesRoute
+  '/pricing': typeof PricingRoute
   '/profile': typeof ProfileRoute
   '/settings': typeof SettingsRoute
   '/travel': typeof TravelRoute
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/journal': typeof JournalRoute
   '/knowledge': typeof KnowledgeRoute
   '/notes': typeof NotesRoute
+  '/pricing': typeof PricingRoute
   '/profile': typeof ProfileRoute
   '/settings': typeof SettingsRoute
   '/travel': typeof TravelRoute
@@ -138,6 +147,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/knowledge'
     | '/notes'
+    | '/pricing'
     | '/profile'
     | '/settings'
     | '/travel'
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/knowledge'
     | '/notes'
+    | '/pricing'
     | '/profile'
     | '/settings'
     | '/travel'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/knowledge'
     | '/notes'
+    | '/pricing'
     | '/profile'
     | '/settings'
     | '/travel'
@@ -181,6 +193,7 @@ export interface RootRouteChildren {
   JournalRoute: typeof JournalRoute
   KnowledgeRoute: typeof KnowledgeRoute
   NotesRoute: typeof NotesRoute
+  PricingRoute: typeof PricingRoute
   ProfileRoute: typeof ProfileRoute
   SettingsRoute: typeof SettingsRoute
   TravelRoute: typeof TravelRoute
@@ -251,6 +264,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profile': {
       id: '/profile'
       path: '/profile'
@@ -285,6 +305,7 @@ const rootRouteChildren: RootRouteChildren = {
   JournalRoute: JournalRoute,
   KnowledgeRoute: KnowledgeRoute,
   NotesRoute: NotesRoute,
+  PricingRoute: PricingRoute,
   ProfileRoute: ProfileRoute,
   SettingsRoute: SettingsRoute,
   TravelRoute: TravelRoute,
