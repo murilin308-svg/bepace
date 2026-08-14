@@ -117,7 +117,7 @@ function PricingPage() {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 0.055, scale: 1 }}
           transition={{ duration: 1.8, ease }}
-          className="pointer-events-none absolute top-16 left-1/2 w-[620px] max-w-none -translate-x-1/2 rounded-full object-contain invert select-none sm:w-[820px]"
+          className="pointer-events-none absolute top-8 left-1/2 w-[620px] max-w-none -translate-x-1/2 rounded-full object-contain invert select-none sm:top-10 sm:w-[820px]"
         />
         <span
           aria-hidden
@@ -128,12 +128,12 @@ function PricingPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease }}
-          className="relative pt-12 text-center text-display text-5xl leading-[0.95] tracking-tight sm:pt-16 sm:text-[7rem]"
+          className="relative pt-8 text-center text-display text-5xl leading-[0.95] tracking-tight sm:pt-12 sm:text-[7rem]"
         >
           Pricing
         </motion.h1>
 
-        <div className="relative mx-auto -mt-6 grid max-w-3xl gap-3 sm:-mt-14 sm:grid-cols-2">
+        <div className="relative mx-auto -mt-4 grid max-w-3xl gap-3 sm:-mt-10 sm:grid-cols-2">
           {plans.map((plan, i) => (
             <motion.article
               key={plan.id}
