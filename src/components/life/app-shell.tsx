@@ -1,4 +1,6 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { AnimatePresence, motion } from "motion/react";
 import {
   BookOpen,
@@ -134,6 +136,15 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  }
 
   return (
     <div className="flex min-h-screen w-full bg-surface-0">
@@ -215,12 +226,12 @@ export function AppShell({ children }: { children: ReactNode }) {
               <Sparkles className="h-3 w-3 text-accent-orange" />
               Week 33 · on track
             </span>
-            <Link
-              to="/auth"
+            <button
+              onClick={handleSignOut}
               className="rounded-lg px-3 py-2 text-xs text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
             >
-              Sign in
-            </Link>
+              Sign out
+            </button>
           </div>
         </header>
 

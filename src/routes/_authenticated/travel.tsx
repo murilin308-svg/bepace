@@ -6,7 +6,7 @@ import { Metric, PageHeader, Panel, PanelHead, Tag } from "@/components/life/pri
 import { travelStats, trips, type Trip } from "@/lib/life-os";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/travel")({
+export const Route = createFileRoute("/_authenticated/travel")({
   head: () => ({
     meta: [
       { title: "Travel — Life OS" },

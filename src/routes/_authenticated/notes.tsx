@@ -6,7 +6,7 @@ import { EmptyState, PageHeader, Panel, Tag } from "@/components/life/primitives
 import { noteFolders, notes } from "@/lib/life-os";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/notes")({
+export const Route = createFileRoute("/_authenticated/notes")({
   head: () => ({
     meta: [
       { title: "Notes — Life OS" },

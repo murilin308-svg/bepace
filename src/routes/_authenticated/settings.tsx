@@ -4,7 +4,7 @@ import { AppShell } from "@/components/life/app-shell";
 import { PageHeader, Panel, PanelHead, Tag } from "@/components/life/primitives";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/settings")({
+export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
     meta: [
       { title: "Settings — Life OS" },

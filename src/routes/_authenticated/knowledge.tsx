@@ -6,7 +6,7 @@ import { EmptyState, PageHeader, Panel, PanelHead, Tag } from "@/components/life
 import { knowledge } from "@/lib/life-os";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/knowledge")({
+export const Route = createFileRoute("/_authenticated/knowledge")({
   head: () => ({
     meta: [
       { title: "Knowledge — Life OS" },

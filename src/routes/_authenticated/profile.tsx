@@ -11,7 +11,7 @@ import {
 } from "@/components/life/primitives";
 import { goals, habits, lifeScore, notes, travelStats, user } from "@/lib/life-os";
 
-export const Route = createFileRoute("/profile")({
+export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
     meta: [
       { title: "Profile — Life OS" },

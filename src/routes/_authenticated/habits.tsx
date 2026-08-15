@@ -6,7 +6,7 @@ import { Metric, PageHeader, Panel, PanelHead, Progress } from "@/components/lif
 import { habits } from "@/lib/life-os";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/habits")({
+export const Route = createFileRoute("/_authenticated/habits")({
   head: () => ({
     meta: [
       { title: "Habits — Life OS" },
