@@ -6,7 +6,7 @@ import { PageHeader, Panel, PanelHead, Progress, Tag } from "@/components/life/p
 import { goals, lifeAreas } from "@/lib/life-os";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/goals")({
+export const Route = createFileRoute("/_authenticated/goals")({
   head: () => ({
     meta: [
       { title: "Goals — Life OS" },

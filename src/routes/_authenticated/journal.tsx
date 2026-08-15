@@ -3,7 +3,7 @@ import { AppShell } from "@/components/life/app-shell";
 import { PageHeader, Panel, PanelHead, Progress, Tag } from "@/components/life/primitives";
 import { journal } from "@/lib/life-os";
 
-export const Route = createFileRoute("/journal")({
+export const Route = createFileRoute("/_authenticated/journal")({
   head: () => ({
     meta: [
       { title: "Journal — Life OS" },

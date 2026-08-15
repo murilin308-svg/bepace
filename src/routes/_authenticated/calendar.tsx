@@ -6,7 +6,7 @@ import { PageHeader, Panel, Tag } from "@/components/life/primitives";
 import { events } from "@/lib/life-os";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/calendar")({
+export const Route = createFileRoute("/_authenticated/calendar")({
   head: () => ({
     meta: [
       { title: "Calendar — Life OS" },
