@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as AuthenticatedCalendarRouteImport } from './routes/_authenticated/calendar'
@@ -28,6 +29,10 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -39,54 +44,54 @@ const PricingRoute = PricingRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedCalendarRoute = AuthenticatedCalendarRouteImport.update({
-  id: '/_authenticated/calendar',
+  id: '/calendar',
   path: '/calendar',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
-  id: '/_authenticated/dashboard',
+  id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedGoalsRoute = AuthenticatedGoalsRouteImport.update({
-  id: '/_authenticated/goals',
+  id: '/goals',
   path: '/goals',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedHabitsRoute = AuthenticatedHabitsRouteImport.update({
-  id: '/_authenticated/habits',
+  id: '/habits',
   path: '/habits',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedJournalRoute = AuthenticatedJournalRouteImport.update({
-  id: '/_authenticated/journal',
+  id: '/journal',
   path: '/journal',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedKnowledgeRoute = AuthenticatedKnowledgeRouteImport.update({
-  id: '/_authenticated/knowledge',
+  id: '/knowledge',
   path: '/knowledge',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedNotesRoute = AuthenticatedNotesRouteImport.update({
-  id: '/_authenticated/notes',
+  id: '/notes',
   path: '/notes',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
-  id: '/_authenticated/profile',
+  id: '/profile',
   path: '/profile',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
-  id: '/_authenticated/settings',
+  id: '/settings',
   path: '/settings',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedTravelRoute = AuthenticatedTravelRouteImport.update({
-  id: '/_authenticated/travel',
+  id: '/travel',
   path: '/travel',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -122,6 +127,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/pricing': typeof PricingRoute
   '/_authenticated/calendar': typeof AuthenticatedCalendarRoute
@@ -169,6 +175,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/auth'
     | '/pricing'
     | '/_authenticated/calendar'
@@ -185,18 +192,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   PricingRoute: typeof PricingRoute
-  AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
-  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
-  AuthenticatedGoalsRoute: typeof AuthenticatedGoalsRoute
-  AuthenticatedHabitsRoute: typeof AuthenticatedHabitsRoute
-  AuthenticatedJournalRoute: typeof AuthenticatedJournalRoute
-  AuthenticatedKnowledgeRoute: typeof AuthenticatedKnowledgeRoute
-  AuthenticatedNotesRoute: typeof AuthenticatedNotesRoute
-  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
-  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
-  AuthenticatedTravelRoute: typeof AuthenticatedTravelRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -206,6 +204,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -227,78 +232,88 @@ declare module '@tanstack/react-router' {
       path: '/calendar'
       fullPath: '/calendar'
       preLoaderRoute: typeof AuthenticatedCalendarRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/goals': {
       id: '/_authenticated/goals'
       path: '/goals'
       fullPath: '/goals'
       preLoaderRoute: typeof AuthenticatedGoalsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/habits': {
       id: '/_authenticated/habits'
       path: '/habits'
       fullPath: '/habits'
       preLoaderRoute: typeof AuthenticatedHabitsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/journal': {
       id: '/_authenticated/journal'
       path: '/journal'
       fullPath: '/journal'
       preLoaderRoute: typeof AuthenticatedJournalRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/knowledge': {
       id: '/_authenticated/knowledge'
       path: '/knowledge'
       fullPath: '/knowledge'
       preLoaderRoute: typeof AuthenticatedKnowledgeRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/notes': {
       id: '/_authenticated/notes'
       path: '/notes'
       fullPath: '/notes'
       preLoaderRoute: typeof AuthenticatedNotesRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/profile': {
       id: '/_authenticated/profile'
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/settings': {
       id: '/_authenticated/settings'
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AuthenticatedSettingsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/travel': {
       id: '/_authenticated/travel'
       path: '/travel'
       fullPath: '/travel'
       preLoaderRoute: typeof AuthenticatedTravelRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AuthRoute: AuthRoute,
-  PricingRoute: PricingRoute,
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedGoalsRoute: typeof AuthenticatedGoalsRoute
+  AuthenticatedHabitsRoute: typeof AuthenticatedHabitsRoute
+  AuthenticatedJournalRoute: typeof AuthenticatedJournalRoute
+  AuthenticatedKnowledgeRoute: typeof AuthenticatedKnowledgeRoute
+  AuthenticatedNotesRoute: typeof AuthenticatedNotesRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedTravelRoute: typeof AuthenticatedTravelRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCalendarRoute: AuthenticatedCalendarRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedGoalsRoute: AuthenticatedGoalsRoute,
@@ -309,6 +324,16 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedTravelRoute: AuthenticatedTravelRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  PricingRoute: PricingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
