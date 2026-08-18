@@ -26,7 +26,7 @@ export async function currentUserId(): Promise<string> {
   return data.user.id;
 }
 
-export function useCollection<T extends Row = Row>(
+export function useCollection<T = Row>(
   table: TableName,
   order: { column: string; ascending?: boolean } = { column: "created_at", ascending: false },
 ) {
