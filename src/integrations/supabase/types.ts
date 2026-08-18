@@ -14,27 +14,335 @@ export type Database = {
   }
   public: {
     Tables: {
+      events: {
+        Row: {
+          category: string
+          created_at: string
+          day: number
+          end_hour: number
+          id: string
+          start_hour: number
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          day?: number
+          end_hour?: number
+          id?: string
+          start_hour?: number
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          day?: number
+          end_hour?: number
+          id?: string
+          start_hour?: number
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      goals: {
+        Row: {
+          area: string
+          created_at: string
+          description: string
+          due: string
+          id: string
+          priority: string
+          progress: number
+          status: string
+          tasks: Json
+          title: string
+          updated_at: string
+          user_id: string
+          vision: string
+        }
+        Insert: {
+          area?: string
+          created_at?: string
+          description?: string
+          due?: string
+          id?: string
+          priority?: string
+          progress?: number
+          status?: string
+          tasks?: Json
+          title: string
+          updated_at?: string
+          user_id: string
+          vision?: string
+        }
+        Update: {
+          area?: string
+          created_at?: string
+          description?: string
+          due?: string
+          id?: string
+          priority?: string
+          progress?: number
+          status?: string
+          tasks?: Json
+          title?: string
+          updated_at?: string
+          user_id?: string
+          vision?: string
+        }
+        Relationships: []
+      }
+      habit_logs: {
+        Row: {
+          created_at: string
+          habit_id: string
+          id: string
+          log_date: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          habit_id: string
+          id?: string
+          log_date?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          habit_id?: string
+          id?: string
+          log_date?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "habit_logs_habit_id_fkey"
+            columns: ["habit_id"]
+            isOneToOne: false
+            referencedRelation: "habits"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      habits: {
+        Row: {
+          area: string
+          created_at: string
+          id: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          area?: string
+          created_at?: string
+          id?: string
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          area?: string
+          created_at?: string
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      journal_entries: {
+        Row: {
+          created_at: string
+          energy: number
+          entry_date: string
+          gratitude: string
+          highlight: string
+          id: string
+          learning: string
+          linked_goal: string | null
+          mood: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          energy?: number
+          entry_date?: string
+          gratitude?: string
+          highlight?: string
+          id?: string
+          learning?: string
+          linked_goal?: string | null
+          mood?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          energy?: number
+          entry_date?: string
+          gratitude?: string
+          highlight?: string
+          id?: string
+          learning?: string
+          linked_goal?: string | null
+          mood?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      knowledge_items: {
+        Row: {
+          collection: string
+          created_at: string
+          id: string
+          note: string
+          tags: string[]
+          title: string
+          type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          collection?: string
+          created_at?: string
+          id?: string
+          note?: string
+          tags?: string[]
+          title: string
+          type?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          collection?: string
+          created_at?: string
+          id?: string
+          note?: string
+          tags?: string[]
+          title?: string
+          type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notes: {
+        Row: {
+          body: string
+          created_at: string
+          favorite: boolean
+          folder: string
+          id: string
+          tags: string[]
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          body?: string
+          created_at?: string
+          favorite?: boolean
+          folder?: string
+          id?: string
+          tags?: string[]
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          favorite?: boolean
+          folder?: string
+          id?: string
+          tags?: string[]
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
           created_at: string
           full_name: string | null
+          handle: string | null
           id: string
+          onboarding_status: string
+          timezone: string | null
           updated_at: string
         }
         Insert: {
           avatar_url?: string | null
           created_at?: string
           full_name?: string | null
+          handle?: string | null
           id: string
+          onboarding_status?: string
+          timezone?: string | null
           updated_at?: string
         }
         Update: {
           avatar_url?: string | null
           created_at?: string
           full_name?: string | null
+          handle?: string | null
           id?: string
+          onboarding_status?: string
+          timezone?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      trips: {
+        Row: {
+          cities: string[]
+          code: string
+          country: string
+          created_at: string
+          dates: string
+          id: string
+          memory: string
+          rating: number
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cities?: string[]
+          code?: string
+          country: string
+          created_at?: string
+          dates?: string
+          id?: string
+          memory?: string
+          rating?: number
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cities?: string[]
+          code?: string
+          country?: string
+          created_at?: string
+          dates?: string
+          id?: string
+          memory?: string
+          rating?: number
+          status?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
