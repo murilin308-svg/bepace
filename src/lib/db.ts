@@ -108,7 +108,7 @@ export type Profile = {
 export function useProfile() {
   return useQuery({
     queryKey: ["profile"],
-    queryFn: async (): Promise<(Profile & { email?: string }) | null> => {
+    queryFn: async (): Promise<(Profile & { email?: string | undefined }) | null> => {
       const { data: auth } = await supabase.auth.getUser();
       if (!auth.user) return null;
       const { data, error } = await client
@@ -283,7 +283,7 @@ export function useSeedExamples() {
       if (habits?.length) {
         const logs: Row[] = [];
         for (const h of habits as Row[]) {
-          for (const d of lastDays(6)) logs.push({ user_id, habit_id: h.id, log_date: d });
+          for (const d of lastDays(6)) logs.push({ user_id, habit_id: h['id'], log_date: d });
         }
         await client.from("habit_logs").insert(logs);
       }
