@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/habits")({
   head: () => ({
     meta: [
-      { title: "Habits — Life OS" },
+      { title: "Habits — BEPACE" },
       {
         name: "description",
         content:
           "Track streaks, consistency and completion rate for the daily habits that quietly build the rest of your life.",
       },
-      { property: "og:title", content: "Habits — Life OS" },
+      { property: "og:title", content: "Habits — BEPACE" },
       {
         property: "og:description",
         content: "Streaks, consistency and completion rate — without the noise.",

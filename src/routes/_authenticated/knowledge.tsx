@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/knowledge")({
   head: () => ({
     meta: [
-      { title: "Knowledge — Life OS" },
+      { title: "Knowledge — BEPACE" },
       {
         name: "description",
         content:
           "A personal library of ideas, insights, summaries and references, organised by collections and tags.",
       },
-      { property: "og:title", content: "Knowledge — Life OS" },
+      { property: "og:title", content: "Knowledge — BEPACE" },
       {
         property: "og:description",
         content: "Your personal library of ideas, insights and references.",

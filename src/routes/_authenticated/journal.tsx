@@ -6,13 +6,13 @@ import { journal } from "@/lib/life-os";
 export const Route = createFileRoute("/_authenticated/journal")({
   head: () => ({
     meta: [
-      { title: "Journal — Life OS" },
+      { title: "Journal — BEPACE" },
       {
         name: "description",
         content:
           "A daily record of mood, energy, gratitude and learnings that becomes a timeline of your life.",
       },
-      { property: "og:title", content: "Journal — Life OS" },
+      { property: "og:title", content: "Journal — BEPACE" },
       {
         property: "og:description",
         content: "Mood, energy, gratitude and learnings — a timeline of your life.",

@@ -14,13 +14,13 @@ import { goals, habits, lifeScore, notes, travelStats, user } from "@/lib/life-o
 export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
     meta: [
-      { title: "Profile — Life OS" },
+      { title: "Profile — BEPACE" },
       {
         name: "description",
         content:
           "Your personal statistics: Life Score history, goals completed, habits active, notes written and countries visited.",
       },
-      { property: "og:title", content: "Profile — Life OS" },
+      { property: "og:title", content: "Profile — BEPACE" },
       {
         property: "og:description",
         content: "The long view of your own evolution.",
@@ -54,7 +54,7 @@ function ProfilePage() {
 
         <div className="space-y-4 lg:col-span-8">
           <Panel className="grid grid-cols-2 divide-x divide-y divide-hairline sm:grid-cols-3 sm:divide-y-0" delay={0.05}>
-            <Metric label="Days using Life OS" value="512" />
+            <Metric label="Days using BEPACE" value="512" />
             <Metric label="Goals completed" value="9" />
             <Metric label="Habits active" value={String(habits.length)} />
             <Metric label="Notes created" value={String(notes.length * 9)} />

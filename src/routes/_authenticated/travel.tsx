@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/travel")({
   head: () => ({
     meta: [
-      { title: "Travel — Life OS" },
+      { title: "Travel — BEPACE" },
       {
         name: "description",
         content:
           "Map the countries you've visited, planned and dream of — with cities, memories and travel statistics in one place.",
       },
-      { property: "og:title", content: "Travel — Life OS" },
+      { property: "og:title", content: "Travel — BEPACE" },
       {
         property: "og:description",
         content: "Visited, planned, wishlist — a world map of the life you've lived.",

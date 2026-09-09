@@ -26,13 +26,13 @@ import {
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
-      { title: "Life OS — Your Personal Command Center" },
+      { title: "BEPACE — Your Personal Command Center" },
       {
         name: "description",
         content:
-          "Life OS brings goals, habits, calendar, notes, travel and journal into one calm command center for your life.",
+          "BEPACE brings goals, habits, calendar, notes, travel and journal into one calm command center for your life.",
       },
-      { property: "og:title", content: "Life OS — Your Personal Command Center" },
+      { property: "og:title", content: "BEPACE — Your Personal Command Center" },
       {
         property: "og:description",
         content:

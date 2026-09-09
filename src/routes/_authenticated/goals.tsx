@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/goals")({
   head: () => ({
     meta: [
-      { title: "Goals — Life OS" },
+      { title: "Goals — BEPACE" },
       {
         name: "description",
         content:
           "Turn a vision into objectives, goals and tasks across health, career, finance, relationships, knowledge and travel.",
       },
-      { property: "og:title", content: "Goals — Life OS" },
+      { property: "og:title", content: "Goals — BEPACE" },
       {
         property: "og:description",
         content: "Vision → objective → goal → task. The architecture of the life you want.",

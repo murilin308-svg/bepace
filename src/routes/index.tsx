@@ -21,13 +21,13 @@ import imgJournal from "@/assets/card-journal.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Life OS — Your Personal Command Center" },
+      { title: "BEPACE — Your Personal Command Center" },
       {
         name: "description",
         content:
-          "Life OS connects goals, habits, calendar, notes, travel and journal into one calm command center for your entire life.",
+          "BEPACE connects goals, habits, calendar, notes, travel and journal into one calm command center for your entire life.",
       },
-      { property: "og:title", content: "Life OS — Your Personal Command Center" },
+      { property: "og:title", content: "BEPACE — Your Personal Command Center" },
       {
         property: "og:description",
         content:
@@ -94,7 +94,7 @@ function Cover() {
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-6 sm:px-8">
         <div className="flex items-center gap-3">
           <Mark className="h-9 w-9" />
-          <span className="text-[13px] font-semibold tracking-[0.2em] uppercase">Life OS</span>
+          <span className="text-[13px] font-semibold tracking-[0.2em] uppercase">BEPACE</span>
         </div>
         <div className="flex items-center gap-2">
           <Link
@@ -165,7 +165,7 @@ function Cover() {
             to="/pricing"
             className="group inline-flex items-center gap-2 rounded-xl bg-accent-orange px-5 py-3 text-xs font-semibold text-black transition-opacity hover:opacity-90"
           >
-            Buy Life OS
+            Buy BEPACE
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <Link
@@ -263,7 +263,7 @@ function Cover() {
                 to="/pricing"
                 className="inline-flex items-center gap-2 rounded-xl bg-accent-orange px-4 py-2.5 text-xs font-semibold text-black transition-opacity hover:opacity-90"
               >
-                Buy Life OS
+                Buy BEPACE
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
               <Link
@@ -279,7 +279,7 @@ function Cover() {
 
       <footer className="border-t border-hairline">
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 text-[11px] tracking-[0.14em] text-muted-foreground uppercase sm:px-8">
-          <span>Life OS</span>
+          <span>BEPACE</span>
           <span>Clarity · Control · Evolution</span>
         </div>
       </footer>
@@ -291,7 +291,7 @@ function Mark({ className }: { className?: string }) {
   return (
     <img
       src={logo.url}
-      alt="Life OS logo"
+      alt="BEPACE logo"
       className={`rounded-full object-contain invert ${className ?? ""}`}
     />
   );

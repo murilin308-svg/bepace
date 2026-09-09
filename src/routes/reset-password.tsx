@@ -8,13 +8,13 @@ export const Route = createFileRoute("/reset-password")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "New password — Life OS" },
+      { title: "New password — BEPACE" },
       {
         name: "description",
-        content: "Set a new password for your Life OS account and get back to your command center.",
+        content: "Set a new password for your BEPACE account and get back to your command center.",
       },
-      { property: "og:title", content: "New password — Life OS" },
-      { property: "og:description", content: "Set a new password for your Life OS account." },
+      { property: "og:title", content: "New password — BEPACE" },
+      { property: "og:description", content: "Set a new password for your BEPACE account." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -46,7 +46,7 @@ function ResetPasswordPage() {
       <div className="w-full max-w-sm rounded-[2rem] border border-border bg-[oklch(0.165_0_0)] p-8 sm:p-10">
         <img
           src={logo.url}
-          alt="Life OS logo"
+          alt="BEPACE logo"
           className="h-9 w-9 rounded-full object-contain invert"
         />
         <h1 className="mt-6 text-lg font-semibold tracking-tight">Set a new password</h1>

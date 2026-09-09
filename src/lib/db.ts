@@ -308,7 +308,7 @@ export function useSeedExamples() {
           entry_date: todayISO(),
           mood: "Good",
           energy: 4,
-          highlight: "Comecei a usar o Life OS de verdade.",
+          highlight: "Comecei a usar o BEPACE de verdade.",
           gratitude: "Uma manhã tranquila.",
           learning: "Sistema simples é sistema usado.",
         },

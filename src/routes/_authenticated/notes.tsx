@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/notes")({
   head: () => ({
     meta: [
-      { title: "Notes — Life OS" },
+      { title: "Notes — BEPACE" },
       {
         name: "description",
         content:
           "Capture ideas, rituals and references in a calm rich-text editor organised by folders, tags and favourites.",
       },
-      { property: "og:title", content: "Notes — Life OS" },
+      { property: "og:title", content: "Notes — BEPACE" },
       {
         property: "og:description",
         content: "A quiet place for ideas, rituals and references.",

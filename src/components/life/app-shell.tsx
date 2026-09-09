@@ -95,7 +95,7 @@ function SidebarBody({
         </span>
         {!collapsed ? (
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold tracking-tight">Life OS</p>
+            <p className="truncate text-sm font-semibold tracking-tight">BEPACE</p>
             <p className="truncate text-[11px] text-muted-foreground">Personal command center</p>
           </div>
         ) : null}
