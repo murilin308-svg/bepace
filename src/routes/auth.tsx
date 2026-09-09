@@ -9,13 +9,13 @@ import { lovable } from "@/integrations/lovable/index";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — Life OS" },
+      { title: "Sign in — BEPACE" },
       {
         name: "description",
         content:
-          "Sign in to Life OS, your personal command center for goals, habits, calendar, notes, travel and journal.",
+          "Sign in to BEPACE, your personal command center for goals, habits, calendar, notes, travel and journal.",
       },
-      { property: "og:title", content: "Sign in — Life OS" },
+      { property: "og:title", content: "Sign in — BEPACE" },
       { property: "og:description", content: "Enter your personal command center." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -69,7 +69,7 @@ function AuthPage() {
         }
         setMessage({
           kind: "info",
-          text: "Conta criada. Confirme o e-mail que enviamos para entrar no Life OS.",
+          text: "Conta criada. Confirme o e-mail que enviamos para entrar no BEPACE.",
         });
         return;
       }
@@ -117,10 +117,10 @@ function AuthPage() {
           <div className="flex items-center gap-3">
             <img
               src={logo.url}
-              alt="Life OS logo"
+              alt="BEPACE logo"
               className="h-9 w-9 rounded-full object-contain invert"
             />
-            <span className="text-sm font-semibold tracking-[0.18em] uppercase">Life OS</span>
+            <span className="text-sm font-semibold tracking-[0.18em] uppercase">BEPACE</span>
           </div>
 
           <div className="py-14">
@@ -232,7 +232,7 @@ function AuthPage() {
                 ) : (
                   <>
                     {mode === "signin"
-                      ? "Enter Life OS"
+                      ? "Enter BEPACE"
                       : mode === "signup"
                         ? "Create my account"
                         : "Send recovery link"}

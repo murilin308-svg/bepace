@@ -6,13 +6,13 @@ import logo from "@/assets/life-os-logo.jpg.asset.json";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Planos e preços — Life OS" },
+      { title: "Planos e preços — BEPACE" },
       {
         name: "description",
         content:
-          "Escolha seu plano do Life OS: Essential por R$ 59,90/mês ou Performance por R$ 97,90/mês — tudo que você precisa para operar sua vida em alta performance.",
+          "Escolha seu plano do BEPACE: Essential por R$ 59,90/mês ou Performance por R$ 97,90/mês — tudo que você precisa para operar sua vida em alta performance.",
       },
-      { property: "og:title", content: "Planos e preços — Life OS" },
+      { property: "og:title", content: "Planos e preços — BEPACE" },
       {
         property: "og:description",
         content:
@@ -70,10 +70,10 @@ function PricingPage() {
         <div className="flex items-center gap-3">
           <img
             src={logo.url}
-            alt="Life OS logo"
+            alt="BEPACE logo"
             className="h-9 w-9 rounded-full object-contain invert"
           />
-          <span className="text-[13px] font-semibold tracking-[0.2em] uppercase">Life OS</span>
+          <span className="text-[13px] font-semibold tracking-[0.2em] uppercase">BEPACE</span>
         </div>
 
         <nav className="flex items-center gap-1 rounded-full border border-hairline bg-surface-1 p-1.5">
@@ -207,7 +207,7 @@ function PricingPage() {
 
       <footer className="border-t border-hairline">
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 text-[11px] tracking-[0.14em] text-muted-foreground uppercase sm:px-8">
-          <span>Life OS</span>
+          <span>BEPACE</span>
           <span>Clarity · Control · Evolution</span>
         </div>
       </footer>

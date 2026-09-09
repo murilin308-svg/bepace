@@ -78,10 +78,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Life OS — Personal Operating System" },
-      { name: "description", content: "Life OS is a calm command center for your goals, habits, calendar, notes, travel and journal." },
+      { title: "BEPACE — Personal Operating System" },
+      { name: "description", content: "BEPACE is a calm command center for your goals, habits, calendar, notes, travel and journal." },
       
-      { property: "og:title", content: "Life OS — Personal Operating System" },
+      { property: "og:title", content: "BEPACE — Personal Operating System" },
       { property: "og:description", content: "One calm place to see where you are and where you are going." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

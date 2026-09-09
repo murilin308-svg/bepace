@@ -7,13 +7,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
     meta: [
-      { title: "Settings — Life OS" },
+      { title: "Settings — BEPACE" },
       {
         name: "description",
         content:
-          "Account, security, notifications, appearance, language, integrations and privacy controls for Life OS.",
+          "Account, security, notifications, appearance, language, integrations and privacy controls for BEPACE.",
       },
-      { property: "og:title", content: "Settings — Life OS" },
+      { property: "og:title", content: "Settings — BEPACE" },
       {
         property: "og:description",
         content: "Account, appearance, integrations and privacy.",

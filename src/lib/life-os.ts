@@ -97,7 +97,7 @@ export const goals: Goal[] = [
   },
   {
     id: "g2",
-    title: "Launch Life OS v1",
+    title: "Launch BEPACE v1",
     description: "Ship the personal command center and use it daily for a full quarter.",
     area: "Career",
     priority: "High",
@@ -166,7 +166,7 @@ export type CalendarEvent = {
 
 export const events: CalendarEvent[] = [
   { id: "e1", title: "Morning run", day: 0, start: 7, end: 8, category: "Health" },
-  { id: "e2", title: "Deep work — Life OS", day: 0, start: 9, end: 12, category: "Work" },
+  { id: "e2", title: "Deep work — BEPACE", day: 0, start: 9, end: 12, category: "Work" },
   { id: "e3", title: "Design review", day: 1, start: 14, end: 15, category: "Work" },
   { id: "e4", title: "Strength session", day: 1, start: 18, end: 19, category: "Health" },
   { id: "e5", title: "Weekly planning", day: 2, start: 8, end: 9, category: "Personal" },
@@ -192,7 +192,7 @@ export const noteFolders = ["All notes", "Ideas", "Work", "Personal", "Travel", 
 export const notes: Note[] = [
   {
     id: "n1",
-    title: "Life OS — first principles",
+    title: "BEPACE — first principles",
     excerpt: "The value is not in the modules, it is in the connections between them.",
     folder: "Ideas",
     tags: ["product", "systems"],
@@ -302,10 +302,10 @@ export const journal: JournalEntry[] = [
     date: "Tue, Aug 11",
     mood: "Good",
     energy: 4,
-    highlight: "Finished the design system for Life OS and it finally feels like one product.",
+    highlight: "Finished the design system for BEPACE and it finally feels like one product.",
     gratitude: "A quiet morning and good coffee.",
     learning: "Depth beats decoration. Tonal layers did more than any effect.",
-    linkedGoal: "Launch Life OS v1",
+    linkedGoal: "Launch BEPACE v1",
   },
   {
     id: "j2",
@@ -347,7 +347,7 @@ export const knowledge: KnowledgeItem[] = [
 ];
 
 export const weekPlan = [
-  { day: "Mon", focus: "Deep work — Life OS core", load: 88 },
+  { day: "Mon", focus: "Deep work — BEPACE core", load: 88 },
   { day: "Tue", focus: "Design review + strength", load: 64 },
   { day: "Wed", focus: "Weekly planning, admin", load: 42 },
   { day: "Thu", focus: "Quarterly review", load: 76 },
@@ -358,8 +358,8 @@ export const weekPlan = [
 
 export const activity = [
   { label: "Completed habit", detail: "Reading — 21 day streak", when: "12m ago" },
-  { label: "Goal progress", detail: "Launch Life OS v1 → 42%", when: "1h ago" },
-  { label: "Note created", detail: "Life OS — first principles", when: "3h ago" },
+  { label: "Goal progress", detail: "Launch BEPACE v1 → 42%", when: "1h ago" },
+  { label: "Note created", detail: "BEPACE — first principles", when: "3h ago" },
   { label: "Journal entry", detail: "Tue, Aug 11", when: "5h ago" },
   { label: "Trip updated", detail: "Portugal moved to Planned", when: "Yesterday" },
 ];

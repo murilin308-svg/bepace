@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/calendar")({
   head: () => ({
     meta: [
-      { title: "Calendar — Life OS" },
+      { title: "Calendar — BEPACE" },
       {
         name: "description",
         content:
           "A premium calendar with day, week, month and year views, categories and reminders — built for planning a life, not just a schedule.",
       },
-      { property: "og:title", content: "Calendar — Life OS" },
+      { property: "og:title", content: "Calendar — BEPACE" },
       {
         property: "og:description",
         content: "Day, week, month and year views for planning a life.",
