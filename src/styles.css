@@ -46,6 +46,7 @@
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-success: var(--success);
+  --color-warning: var(--warning);
   --color-border: var(--border);
   --color-hairline: var(--hairline);
   --color-input: var(--input);
@@ -107,7 +108,7 @@
   --ring: oklch(0.717 0.196 47.5);
 
 
-  --chart-1: oklch(0.685 0.212 41.5);
+  --chart-1: oklch(0.717 0.196 47.5);
   --chart-2: oklch(0.75 0 0);
   --chart-3: oklch(0.5 0 0);
   --chart-4: oklch(0.35 0 0);
@@ -115,12 +116,12 @@
 
   --sidebar: oklch(0.135 0 0);
   --sidebar-foreground: oklch(0.9 0 0);
-  --sidebar-primary: oklch(0.685 0.212 41.5);
+  --sidebar-primary: oklch(0.717 0.196 47.5);
   --sidebar-primary-foreground: oklch(0.13 0 0);
   --sidebar-accent: oklch(0.205 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 7%);
-  --sidebar-ring: oklch(0.685 0.212 41.5);
+  --sidebar-ring: oklch(0.717 0.196 47.5);
 }
 
 .light {
