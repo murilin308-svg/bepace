@@ -3,40 +3,51 @@ import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AnimatePresence, motion } from "motion/react";
 import {
-  BookOpen,
+  Bot,
   CalendarDays,
-  Compass,
+  CreditCard,
+  Dumbbell,
   Gauge,
-  Globe2,
-  NotebookPen,
+  GraduationCap,
+  HandHeart,
+  Landmark,
+  Newspaper,
   PanelLeft,
-  Repeat2,
+  Salad,
   Search,
   Settings2,
+  ShoppingCart,
   Sparkles,
-  Target,
+  Stars,
+  Telescope,
   User,
   X,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { user } from "@/lib/life-os";
+import { useProfile } from "@/lib/db";
 
 const nav = [
   { to: "/dashboard", label: "Dashboard", icon: Gauge },
-  { to: "/notes", label: "Notes", icon: NotebookPen },
-  { to: "/calendar", label: "Calendar", icon: CalendarDays },
-  { to: "/goals", label: "Goals", icon: Target },
-  { to: "/habits", label: "Habits", icon: Repeat2 },
-  { to: "/travel", label: "Travel", icon: Globe2 },
-  { to: "/journal", label: "Journal", icon: BookOpen },
-  { to: "/knowledge", label: "Knowledge", icon: Compass },
+  { to: "/calendar", label: "Calendário", icon: CalendarDays },
+  { to: "/oracao", label: "Oração", icon: HandHeart },
+  { to: "/alimentacao", label: "Alimentação", icon: Salad },
+  { to: "/treinos", label: "Treinos", icon: Dumbbell },
+  { to: "/estudos", label: "Estudos", icon: GraduationCap },
+  { to: "/noticias", label: "Notícias", icon: Newspaper },
+  { to: "/visao", label: "Visão de Futuro", icon: Telescope },
+  { to: "/compras", label: "Lista de Compras", icon: ShoppingCart },
+  { to: "/experiencias", label: "Experiências", icon: Stars },
+  { to: "/investimentos", label: "Investimentos", icon: Landmark },
+  { to: "/cartoes", label: "Cartões", icon: CreditCard },
+  { to: "/assistente", label: "Assistente IA", icon: Bot },
 ] as const;
 
 const secondary = [
-  { to: "/profile", label: "Profile", icon: User },
-  { to: "/settings", label: "Settings", icon: Settings2 },
+  { to: "/profile", label: "Perfil", icon: User },
+  { to: "/settings", label: "Configurações", icon: Settings2 },
 ] as const;
+
 
 function NavList({
   items,
