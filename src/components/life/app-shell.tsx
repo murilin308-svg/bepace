@@ -3,40 +3,51 @@ import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AnimatePresence, motion } from "motion/react";
 import {
-  BookOpen,
+  Bot,
   CalendarDays,
-  Compass,
+  CreditCard,
+  Dumbbell,
   Gauge,
-  Globe2,
-  NotebookPen,
+  GraduationCap,
+  HandHeart,
+  Landmark,
+  Newspaper,
   PanelLeft,
-  Repeat2,
+  Salad,
   Search,
   Settings2,
+  ShoppingCart,
   Sparkles,
-  Target,
+  Stars,
+  Telescope,
   User,
   X,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { user } from "@/lib/life-os";
+import { useProfile } from "@/lib/db";
 
 const nav = [
   { to: "/dashboard", label: "Dashboard", icon: Gauge },
-  { to: "/notes", label: "Notes", icon: NotebookPen },
-  { to: "/calendar", label: "Calendar", icon: CalendarDays },
-  { to: "/goals", label: "Goals", icon: Target },
-  { to: "/habits", label: "Habits", icon: Repeat2 },
-  { to: "/travel", label: "Travel", icon: Globe2 },
-  { to: "/journal", label: "Journal", icon: BookOpen },
-  { to: "/knowledge", label: "Knowledge", icon: Compass },
+  { to: "/calendar", label: "Calendário", icon: CalendarDays },
+  { to: "/oracao", label: "Oração", icon: HandHeart },
+  { to: "/alimentacao", label: "Alimentação", icon: Salad },
+  { to: "/treinos", label: "Treinos", icon: Dumbbell },
+  { to: "/estudos", label: "Estudos", icon: GraduationCap },
+  { to: "/noticias", label: "Notícias", icon: Newspaper },
+  { to: "/visao", label: "Visão de Futuro", icon: Telescope },
+  { to: "/compras", label: "Lista de Compras", icon: ShoppingCart },
+  { to: "/experiencias", label: "Experiências", icon: Stars },
+  { to: "/investimentos", label: "Investimentos", icon: Landmark },
+  { to: "/cartoes", label: "Cartões", icon: CreditCard },
+  { to: "/assistente", label: "Assistente IA", icon: Bot },
 ] as const;
 
 const secondary = [
-  { to: "/profile", label: "Profile", icon: User },
-  { to: "/settings", label: "Settings", icon: Settings2 },
+  { to: "/profile", label: "Perfil", icon: User },
+  { to: "/settings", label: "Configurações", icon: Settings2 },
 ] as const;
+
 
 function NavList({
   items,
@@ -87,25 +98,36 @@ function SidebarBody({
   pathname: string;
   onNavigate?: (() => void) | undefined;
 }) {
+  const { data: profile } = useProfile();
+  const name = profile?.full_name || profile?.email || "Sua conta";
+  const initials = name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase() ?? "")
+    .join("");
+
   return (
     <div className="flex h-full flex-col">
       <div className={cn("flex items-center gap-3 px-5 pt-6 pb-7", collapsed && "px-4")}>
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-accent-orange text-[13px] font-bold text-black">
-          L
+          B
         </span>
         {!collapsed ? (
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold tracking-tight">BEPACE</p>
-            <p className="truncate text-[11px] text-muted-foreground">Personal command center</p>
+            <p className="truncate text-[11px] text-muted-foreground">
+              Sua vida organizada em um único lugar
+            </p>
           </div>
         ) : null}
       </div>
 
       <nav className={cn("flex-1 overflow-y-auto px-3", collapsed && "px-2")}>
-        {!collapsed ? <p className="eyebrow px-3 pb-2">Life</p> : null}
+        {!collapsed ? <p className="eyebrow px-3 pb-2">Módulos</p> : null}
         <NavList items={nav} collapsed={collapsed} pathname={pathname} onNavigate={onNavigate} />
         <div className="my-5 h-px bg-hairline" />
-        {!collapsed ? <p className="eyebrow px-3 pb-2">You</p> : null}
+        {!collapsed ? <p className="eyebrow px-3 pb-2">Você</p> : null}
         <NavList items={secondary} collapsed={collapsed} pathname={pathname} onNavigate={onNavigate} />
       </nav>
 
@@ -116,14 +138,12 @@ function SidebarBody({
           className="flex items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-surface-1"
         >
           <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-surface-3 text-[11px] font-semibold">
-            {user.initials}
+            {initials || "•"}
           </span>
           {!collapsed ? (
             <span className="min-w-0">
-              <span className="block truncate text-xs font-medium">{user.name}</span>
-              <span className="block truncate text-[11px] text-muted-foreground">
-                Life Score 78
-              </span>
+              <span className="block truncate text-xs font-medium">{name}</span>
+              <span className="block truncate text-[11px] text-muted-foreground">Índice BEPACE</span>
             </span>
           ) : null}
         </Link>
@@ -131,6 +151,8 @@ function SidebarBody({
     </div>
   );
 }
+
+
 
 export function AppShell({ children }: { children: ReactNode }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -214,7 +236,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <button className="group flex min-w-0 items-center gap-2.5 rounded-xl border border-hairline bg-surface-1 px-3 py-2 text-left transition-colors hover:border-border sm:max-w-sm">
             <Search className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
             <span className="truncate text-xs text-muted-foreground">
-              Search everything
+              Buscar em tudo
             </span>
             <span className="ml-auto hidden shrink-0 rounded-md border border-border px-1.5 py-0.5 text-[10px] text-muted-foreground sm:block">
               ⌘K
@@ -224,7 +246,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-2">
             <span className="hidden items-center gap-2 rounded-full border border-hairline bg-surface-1 px-3 py-1.5 text-[11px] text-muted-foreground sm:flex">
               <Sparkles className="h-3 w-3 text-accent-orange" />
-              Week 33 · on track
+              Semana em ritmo
             </span>
             <button
               onClick={handleSignOut}

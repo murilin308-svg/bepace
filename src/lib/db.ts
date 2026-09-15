@@ -10,7 +10,22 @@ export type TableName =
   | "events"
   | "journal_entries"
   | "trips"
-  | "knowledge_items";
+  | "knowledge_items"
+  | "prayers"
+  | "prayer_requests"
+  | "meals"
+  | "body_logs"
+  | "workouts"
+  | "study_plans"
+  | "news_topics"
+  | "saved_news"
+  | "vision_items"
+  | "shopping_items"
+  | "experiences"
+  | "investments"
+  | "cards"
+  | "card_expenses";
+
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Row = Record<string, any>;
