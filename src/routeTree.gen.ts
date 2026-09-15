@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedAlimentacaoRouteImport } from './routes/_authenticated/alimentacao'
 import { Route as AuthenticatedCalendarRouteImport } from './routes/_authenticated/calendar'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedGoalsRouteImport } from './routes/_authenticated/goals'
@@ -21,9 +22,11 @@ import { Route as AuthenticatedHabitsRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedJournalRouteImport } from './routes/_authenticated/journal'
 import { Route as AuthenticatedKnowledgeRouteImport } from './routes/_authenticated/knowledge'
 import { Route as AuthenticatedNotesRouteImport } from './routes/_authenticated/notes'
+import { Route as AuthenticatedOracaoRouteImport } from './routes/_authenticated/oracao'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedTravelRouteImport } from './routes/_authenticated/travel'
+import { Route as AuthenticatedTreinosRouteImport } from './routes/_authenticated/treinos'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -49,6 +52,12 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAlimentacaoRoute =
+  AuthenticatedAlimentacaoRouteImport.update({
+    id: '/alimentacao',
+    path: '/alimentacao',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedCalendarRoute = AuthenticatedCalendarRouteImport.update({
   id: '/calendar',
   path: '/calendar',
@@ -84,6 +93,11 @@ const AuthenticatedNotesRoute = AuthenticatedNotesRouteImport.update({
   path: '/notes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedOracaoRoute = AuthenticatedOracaoRouteImport.update({
+  id: '/oracao',
+  path: '/oracao',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -99,12 +113,18 @@ const AuthenticatedTravelRoute = AuthenticatedTravelRouteImport.update({
   path: '/travel',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedTreinosRoute = AuthenticatedTreinosRouteImport.update({
+  id: '/treinos',
+  path: '/treinos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/alimentacao': typeof AuthenticatedAlimentacaoRoute
   '/calendar': typeof AuthenticatedCalendarRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/goals': typeof AuthenticatedGoalsRoute
@@ -112,15 +132,18 @@ export interface FileRoutesByFullPath {
   '/journal': typeof AuthenticatedJournalRoute
   '/knowledge': typeof AuthenticatedKnowledgeRoute
   '/notes': typeof AuthenticatedNotesRoute
+  '/oracao': typeof AuthenticatedOracaoRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/travel': typeof AuthenticatedTravelRoute
+  '/treinos': typeof AuthenticatedTreinosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/alimentacao': typeof AuthenticatedAlimentacaoRoute
   '/calendar': typeof AuthenticatedCalendarRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/goals': typeof AuthenticatedGoalsRoute
@@ -128,9 +151,11 @@ export interface FileRoutesByTo {
   '/journal': typeof AuthenticatedJournalRoute
   '/knowledge': typeof AuthenticatedKnowledgeRoute
   '/notes': typeof AuthenticatedNotesRoute
+  '/oracao': typeof AuthenticatedOracaoRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/travel': typeof AuthenticatedTravelRoute
+  '/treinos': typeof AuthenticatedTreinosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -139,6 +164,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/alimentacao': typeof AuthenticatedAlimentacaoRoute
   '/_authenticated/calendar': typeof AuthenticatedCalendarRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/goals': typeof AuthenticatedGoalsRoute
@@ -146,9 +172,11 @@ export interface FileRoutesById {
   '/_authenticated/journal': typeof AuthenticatedJournalRoute
   '/_authenticated/knowledge': typeof AuthenticatedKnowledgeRoute
   '/_authenticated/notes': typeof AuthenticatedNotesRoute
+  '/_authenticated/oracao': typeof AuthenticatedOracaoRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/travel': typeof AuthenticatedTravelRoute
+  '/_authenticated/treinos': typeof AuthenticatedTreinosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -157,6 +185,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/pricing'
     | '/reset-password'
+    | '/alimentacao'
     | '/calendar'
     | '/dashboard'
     | '/goals'
@@ -164,15 +193,18 @@ export interface FileRouteTypes {
     | '/journal'
     | '/knowledge'
     | '/notes'
+    | '/oracao'
     | '/profile'
     | '/settings'
     | '/travel'
+    | '/treinos'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/pricing'
     | '/reset-password'
+    | '/alimentacao'
     | '/calendar'
     | '/dashboard'
     | '/goals'
@@ -180,9 +212,11 @@ export interface FileRouteTypes {
     | '/journal'
     | '/knowledge'
     | '/notes'
+    | '/oracao'
     | '/profile'
     | '/settings'
     | '/travel'
+    | '/treinos'
   id:
     | '__root__'
     | '/'
@@ -190,6 +224,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/pricing'
     | '/reset-password'
+    | '/_authenticated/alimentacao'
     | '/_authenticated/calendar'
     | '/_authenticated/dashboard'
     | '/_authenticated/goals'
@@ -197,9 +232,11 @@ export interface FileRouteTypes {
     | '/_authenticated/journal'
     | '/_authenticated/knowledge'
     | '/_authenticated/notes'
+    | '/_authenticated/oracao'
     | '/_authenticated/profile'
     | '/_authenticated/settings'
     | '/_authenticated/travel'
+    | '/_authenticated/treinos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -246,6 +283,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/alimentacao': {
+      id: '/_authenticated/alimentacao'
+      path: '/alimentacao'
+      fullPath: '/alimentacao'
+      preLoaderRoute: typeof AuthenticatedAlimentacaoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/calendar': {
       id: '/_authenticated/calendar'
@@ -296,6 +340,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedNotesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/oracao': {
+      id: '/_authenticated/oracao'
+      path: '/oracao'
+      fullPath: '/oracao'
+      preLoaderRoute: typeof AuthenticatedOracaoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/profile': {
       id: '/_authenticated/profile'
       path: '/profile'
@@ -317,10 +368,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTravelRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/treinos': {
+      id: '/_authenticated/treinos'
+      path: '/treinos'
+      fullPath: '/treinos'
+      preLoaderRoute: typeof AuthenticatedTreinosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAlimentacaoRoute: typeof AuthenticatedAlimentacaoRoute
   AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedGoalsRoute: typeof AuthenticatedGoalsRoute
@@ -328,12 +387,15 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedJournalRoute: typeof AuthenticatedJournalRoute
   AuthenticatedKnowledgeRoute: typeof AuthenticatedKnowledgeRoute
   AuthenticatedNotesRoute: typeof AuthenticatedNotesRoute
+  AuthenticatedOracaoRoute: typeof AuthenticatedOracaoRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedTravelRoute: typeof AuthenticatedTravelRoute
+  AuthenticatedTreinosRoute: typeof AuthenticatedTreinosRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAlimentacaoRoute: AuthenticatedAlimentacaoRoute,
   AuthenticatedCalendarRoute: AuthenticatedCalendarRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedGoalsRoute: AuthenticatedGoalsRoute,
@@ -341,9 +403,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedJournalRoute: AuthenticatedJournalRoute,
   AuthenticatedKnowledgeRoute: AuthenticatedKnowledgeRoute,
   AuthenticatedNotesRoute: AuthenticatedNotesRoute,
+  AuthenticatedOracaoRoute: AuthenticatedOracaoRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedTravelRoute: AuthenticatedTravelRoute,
+  AuthenticatedTreinosRoute: AuthenticatedTreinosRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
