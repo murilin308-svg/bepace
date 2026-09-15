@@ -152,9 +152,7 @@ function SidebarBody({
   );
 }
 
-    </div>
-  );
-}
+
 
 export function AppShell({ children }: { children: ReactNode }) {
   const [collapsed, setCollapsed] = useState(false);
