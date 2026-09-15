@@ -238,7 +238,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <button className="group flex min-w-0 items-center gap-2.5 rounded-xl border border-hairline bg-surface-1 px-3 py-2 text-left transition-colors hover:border-border sm:max-w-sm">
             <Search className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
             <span className="truncate text-xs text-muted-foreground">
-              Search everything
+              Buscar em tudo
             </span>
             <span className="ml-auto hidden shrink-0 rounded-md border border-border px-1.5 py-0.5 text-[10px] text-muted-foreground sm:block">
               ⌘K
@@ -248,7 +248,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-2">
             <span className="hidden items-center gap-2 rounded-full border border-hairline bg-surface-1 px-3 py-1.5 text-[11px] text-muted-foreground sm:flex">
               <Sparkles className="h-3 w-3 text-accent-orange" />
-              Week 33 · on track
+              Semana em ritmo
             </span>
             <button
               onClick={handleSignOut}
