@@ -98,25 +98,36 @@ function SidebarBody({
   pathname: string;
   onNavigate?: (() => void) | undefined;
 }) {
+  const { data: profile } = useProfile();
+  const name = profile?.full_name || profile?.email || "Sua conta";
+  const initials = name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase() ?? "")
+    .join("");
+
   return (
     <div className="flex h-full flex-col">
       <div className={cn("flex items-center gap-3 px-5 pt-6 pb-7", collapsed && "px-4")}>
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-accent-orange text-[13px] font-bold text-black">
-          L
+          B
         </span>
         {!collapsed ? (
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold tracking-tight">BEPACE</p>
-            <p className="truncate text-[11px] text-muted-foreground">Personal command center</p>
+            <p className="truncate text-[11px] text-muted-foreground">
+              Sua vida organizada em um único lugar
+            </p>
           </div>
         ) : null}
       </div>
 
       <nav className={cn("flex-1 overflow-y-auto px-3", collapsed && "px-2")}>
-        {!collapsed ? <p className="eyebrow px-3 pb-2">Life</p> : null}
+        {!collapsed ? <p className="eyebrow px-3 pb-2">Módulos</p> : null}
         <NavList items={nav} collapsed={collapsed} pathname={pathname} onNavigate={onNavigate} />
         <div className="my-5 h-px bg-hairline" />
-        {!collapsed ? <p className="eyebrow px-3 pb-2">You</p> : null}
+        {!collapsed ? <p className="eyebrow px-3 pb-2">Você</p> : null}
         <NavList items={secondary} collapsed={collapsed} pathname={pathname} onNavigate={onNavigate} />
       </nav>
 
@@ -127,18 +138,20 @@ function SidebarBody({
           className="flex items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-surface-1"
         >
           <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-surface-3 text-[11px] font-semibold">
-            {user.initials}
+            {initials || "•"}
           </span>
           {!collapsed ? (
             <span className="min-w-0">
-              <span className="block truncate text-xs font-medium">{user.name}</span>
-              <span className="block truncate text-[11px] text-muted-foreground">
-                Life Score 78
-              </span>
+              <span className="block truncate text-xs font-medium">{name}</span>
+              <span className="block truncate text-[11px] text-muted-foreground">Índice BEPACE</span>
             </span>
           ) : null}
         </Link>
       </div>
+    </div>
+  );
+}
+
     </div>
   );
 }
