@@ -10,10 +10,10 @@
 - [x] Treinos
 
 ## Parte 2
-- [ ] Estudos
-- [ ] Notícias (preferências de setor + feed salvo)
-- [ ] Visão de Futuro (mural com imagens/metas)
-- [ ] Calendário (visões dia/semana/mês, filtros, CRUD)
+- [x] Estudos
+- [x] Notícias (preferências de setor + leitura salva; feed automático bloqueado sem NewsAPI)
+- [x] Visão de Futuro (mural com categorias, prazos, imagens e progresso)
+- [ ] Calendário (visões dia/semana/mês, filtros, CRUD) — integrações Google/Outlook/Teams bloqueadas sem OAuth
 
 ## Parte 3
 - [ ] Lista de Compras (categorias + integração alimentação)
