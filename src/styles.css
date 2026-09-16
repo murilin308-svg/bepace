@@ -73,28 +73,28 @@
 .dark {
   --radius: 1.1rem;
 
-  /* BEPACE — preto #171717 com camadas de cinza */
-  --background: oklch(0.215 0 0);
-  --surface-0: oklch(0.215 0 0);
-  --surface-1: oklch(0.248 0 0);
-  --surface-2: oklch(0.285 0 0);
-  --surface-3: oklch(0.352 0 0);
+  /* BEPACE — fundo preto #0A0A0A com camadas de cinza */
+  --background: oklch(0.145 0 0);
+  --surface-0: oklch(0.145 0 0);
+  --surface-1: oklch(0.185 0 0);
+  --surface-2: oklch(0.23 0 0);
+  --surface-3: oklch(0.3 0 0);
 
   --foreground: oklch(1 0 0);
-  --card: oklch(0.248 0 0);
+  --card: oklch(0.185 0 0);
   --card-foreground: oklch(1 0 0);
-  --popover: oklch(0.285 0 0);
+  --popover: oklch(0.23 0 0);
   --popover-foreground: oklch(1 0 0);
 
   --primary: oklch(1 0 0);
-  --primary-foreground: oklch(0.215 0 0);
+  --primary-foreground: oklch(0.145 0 0);
   --accent-orange: oklch(0.717 0.196 47.5);
 
-  --secondary: oklch(0.285 0 0);
+  --secondary: oklch(0.23 0 0);
   --secondary-foreground: oklch(0.96 0 0);
-  --muted: oklch(0.285 0 0);
+  --muted: oklch(0.23 0 0);
   --muted-foreground: oklch(0.78 0 0);
-  --accent: oklch(0.352 0 0);
+  --accent: oklch(0.3 0 0);
   --accent-foreground: oklch(1 0 0);
 
   --destructive: oklch(0.645 0.207 26.5);
