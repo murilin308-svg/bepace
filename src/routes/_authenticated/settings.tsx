@@ -1,36 +1,37 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { toast } from "sonner";
 import { AppShell } from "@/components/life/app-shell";
 import { PageHeader, Panel, PanelHead, Tag } from "@/components/life/primitives";
+import { EditText, FieldLabel } from "@/components/life/editable";
+import { useProfile, useUpdateProfile } from "@/lib/db";
+import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
     meta: [
-      { title: "Settings — BEPACE" },
+      { title: "Configurações — BEPACE" },
       {
         name: "description",
-        content:
-          "Account, security, notifications, appearance, language, integrations and privacy controls for BEPACE.",
+        content: "Perfil, preferências, integrações, notificações, tema e segurança do BEPACE.",
       },
-      { property: "og:title", content: "Settings — BEPACE" },
-      {
-        property: "og:description",
-        content: "Account, appearance, integrations and privacy.",
-      },
+      { property: "og:title", content: "Configurações — BEPACE" },
+      { property: "og:description", content: "Perfil, preferências, integrações e segurança." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: SettingsPage,
 });
 
 const sections = [
-  "Account",
-  "Security",
-  "Notifications",
-  "Appearance",
-  "Language",
-  "Integrations",
-  "Privacy",
+  "Perfil",
+  "Preferências",
+  "Integrações",
+  "Notificações",
+  "Tema",
+  "Segurança",
 ] as const;
 
 function Row({
@@ -66,7 +67,7 @@ function Toggle({ on }: { on?: boolean }) {
     >
       <span
         className={cn(
-          "absolute top-0.5 h-4.5 w-4.5 rounded-full transition-all",
+          "absolute top-0.5 rounded-full transition-all",
           value ? "left-[22px] bg-black" : "left-0.5 bg-foreground/70",
         )}
         style={{ height: 18, width: 18 }}
@@ -76,15 +77,26 @@ function Toggle({ on }: { on?: boolean }) {
 }
 
 function SettingsPage() {
-  const [section, setSection] = useState<(typeof sections)[number]>("Appearance");
-  const [theme, setTheme] = useState("Dark");
+  const [section, setSection] = useState<(typeof sections)[number]>("Perfil");
+  const [theme, setTheme] = useState("Escuro");
+  const { data: profile } = useProfile();
+  const updateProfile = useUpdateProfile();
+  const navigate = useNavigate();
+
+  const save = (key: string, value: string) => updateProfile.mutate({ [key]: value });
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    toast.success("Você saiu da sua conta.");
+    void navigate({ to: "/auth" });
+  };
 
   return (
     <AppShell>
       <PageHeader
-        eyebrow="Settings"
-        title="How the system behaves"
-        description="Dark is the primary, most refined experience. Everything else is optional."
+        eyebrow="Configurações"
+        title="Como o sistema se comporta"
+        description="O escuro é a experiência principal do BEPACE. Todo o resto é opcional."
       />
 
       <div className="grid gap-4 lg:grid-cols-12">
@@ -115,13 +127,81 @@ function SettingsPage() {
 
         <div className="space-y-4 lg:col-span-9">
           <Panel raised delay={0.05}>
-            <PanelHead title={section} hint="Only what matters here" />
-            {section === "Appearance" ? (
+            <PanelHead title={section} hint="Apenas o que importa aqui" />
+
+            {section === "Perfil" ? (
+              <div className="space-y-4 border-t border-hairline px-6 py-5">
+                <div>
+                  <FieldLabel>Nome completo</FieldLabel>
+                  <EditText
+                    value={profile?.full_name ?? ""}
+                    placeholder="Seu nome"
+                    className="text-sm"
+                    onCommit={(v) => save("full_name", v)}
+                  />
+                </div>
+                <div>
+                  <FieldLabel>Nome de usuário</FieldLabel>
+                  <EditText
+                    value={profile?.handle ?? ""}
+                    placeholder="@seuusuario"
+                    className="text-sm"
+                    onCommit={(v) => save("handle", v)}
+                  />
+                </div>
+                <div>
+                  <FieldLabel>Fuso horário</FieldLabel>
+                  <EditText
+                    value={profile?.timezone ?? ""}
+                    placeholder="America/Sao_Paulo"
+                    className="text-sm"
+                    onCommit={(v) => save("timezone", v)}
+                  />
+                </div>
+                <div>
+                  <FieldLabel>E-mail</FieldLabel>
+                  <p className="text-sm text-muted-foreground">{profile?.email ?? "—"}</p>
+                </div>
+              </div>
+            ) : null}
+
+            {section === "Preferências" ? (
+              <>
+                <Row title="Semana começa em" hint="Segunda-feira" control={<Tag>Segunda</Tag>} />
+                <Row title="Formato de data" hint="DD/MM/AAAA" control={<Tag>Brasil</Tag>} />
+                <Row title="Moeda" hint="Real brasileiro" control={<Tag accent>R$</Tag>} />
+                <Row title="Idioma" hint="Português do Brasil" control={<Tag>PT-BR</Tag>} />
+              </>
+            ) : null}
+
+            {section === "Integrações" ? (
+              <>
+                <Row
+                  title="Google Calendar"
+                  hint="Precisa das suas credenciais do Google para conectar"
+                  control={<Tag>Pendente</Tag>}
+                />
+                <Row title="Outlook / Teams" hint="Precisa das credenciais da Microsoft" control={<Tag>Pendente</Tag>} />
+                <Row title="WhatsApp" hint="Precisa de acesso à API oficial do WhatsApp" control={<Tag>Pendente</Tag>} />
+                <Row title="Notícias" hint="Precisa de uma chave de serviço de notícias" control={<Tag>Pendente</Tag>} />
+              </>
+            ) : null}
+
+            {section === "Notificações" ? (
+              <>
+                <Row title="Lembrete diário" hint="21:00" control={<Toggle on />} />
+                <Row title="Avisos de treino" control={<Toggle on />} />
+                <Row title="Revisão semanal" hint="Domingo pela manhã" control={<Toggle on />} />
+                <Row title="Resumos por e-mail" control={<Toggle />} />
+              </>
+            ) : null}
+
+            {section === "Tema" ? (
               <>
                 <div className="border-t border-hairline px-6 py-5">
-                  <p className="text-sm">Theme</p>
+                  <p className="text-sm">Aparência</p>
                   <div className="mt-3 grid gap-3 sm:grid-cols-3">
-                    {["Dark", "Light", "System"].map((t) => (
+                    {["Escuro", "Claro", "Sistema"].map((t) => (
                       <button
                         key={t}
                         onClick={() => setTheme(t)}
@@ -135,84 +215,61 @@ function SettingsPage() {
                         <span
                           className={cn(
                             "block h-14 rounded-lg border border-border",
-                            t === "Light" ? "bg-[oklch(0.95_0_0)]" : "bg-[oklch(0.14_0_0)]",
+                            t === "Claro" ? "bg-[oklch(0.95_0_0)]" : "bg-[oklch(0.145_0_0)]",
                           )}
                         />
                         <span className="mt-3 block text-xs font-medium">{t}</span>
-                        {t === "Dark" ? (
+                        {t === "Escuro" ? (
                           <span className="mt-1 block text-[11px] text-muted-foreground">
-                            Recommended
+                            Recomendado
                           </span>
                         ) : null}
                       </button>
                     ))}
                   </div>
                 </div>
-                <Row title="Reduce motion" hint="Softer transitions across the system" control={<Toggle />} />
-                <Row title="Compact density" hint="Tighter cards and spacing" control={<Toggle />} />
-                <Row title="Accent colour" hint="Orange is used sparingly by design" control={<Tag accent>Orange</Tag>} />
+                <Row title="Menos animações" hint="Transições mais discretas" control={<Toggle />} />
+                <Row title="Modo compacto" hint="Cards e espaçamentos menores" control={<Toggle />} />
+                <Row title="Cor de destaque" hint="Laranja, usado com parcimônia" control={<Tag accent>Laranja</Tag>} />
               </>
             ) : null}
 
-            {section === "Account" ? (
+            {section === "Segurança" ? (
               <>
-                <Row title="Name" hint="Murilo Rovatti" control={<Tag>Edit</Tag>} />
-                <Row title="Email" hint="murilo@lifeos.app" control={<Tag>Edit</Tag>} />
-                <Row title="Timezone" hint="America/Sao_Paulo" control={<Tag>Edit</Tag>} />
+                <Row
+                  title="Alterar senha"
+                  hint="Enviamos um link para o seu e-mail"
+                  control={
+                    <button
+                      onClick={async () => {
+                        if (!profile?.email) return;
+                        const { error } = await supabase.auth.resetPasswordForEmail(profile.email, {
+                          redirectTo: `${window.location.origin}/reset-password`,
+                        });
+                        if (error) toast.error(error.message);
+                        else toast.success("Link de redefinição enviado.");
+                      }}
+                      className="rounded-lg border border-hairline bg-surface-2 px-3 py-1.5 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      Enviar link
+                    </button>
+                  }
+                />
+                <Row
+                  title="Sair da conta"
+                  hint="Encerra a sessão neste dispositivo"
+                  control={
+                    <button
+                      onClick={() => void signOut()}
+                      className="rounded-lg border border-hairline bg-surface-2 px-3 py-1.5 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      Sair
+                    </button>
+                  }
+                />
+                <Row title="Diário privado" hint="Fora de qualquer resumo" control={<Toggle on />} />
               </>
             ) : null}
-
-            {section === "Security" ? (
-              <>
-                <Row title="Two-factor authentication" hint="Recommended" control={<Toggle />} />
-                <Row title="Active sessions" hint="2 devices" control={<Tag>Manage</Tag>} />
-                <Row title="Password" hint="Last changed 3 months ago" control={<Tag>Change</Tag>} />
-              </>
-            ) : null}
-
-            {section === "Notifications" ? (
-              <>
-                <Row title="Daily check-in reminder" hint="21:00" control={<Toggle on />} />
-                <Row title="Habit nudges" control={<Toggle on />} />
-                <Row title="Weekly review" hint="Sunday morning" control={<Toggle on />} />
-                <Row title="Email digests" control={<Toggle />} />
-              </>
-            ) : null}
-
-            {section === "Language" ? (
-              <>
-                <Row title="Interface language" hint="English" control={<Tag>Change</Tag>} />
-                <Row title="Week starts on" hint="Monday" control={<Tag>Change</Tag>} />
-                <Row title="Date format" hint="DD/MM/YYYY" control={<Tag>Change</Tag>} />
-              </>
-            ) : null}
-
-            {section === "Integrations" ? (
-              <>
-                <Row title="Google Calendar" hint="Two-way sync" control={<Tag>Connect</Tag>} />
-                <Row title="Outlook Calendar" control={<Tag>Connect</Tag>} />
-                <Row title="Apple Calendar" control={<Tag>Connect</Tag>} />
-                <Row title="Health data" hint="Coming with the Health module" control={<Tag>Soon</Tag>} />
-              </>
-            ) : null}
-
-            {section === "Privacy" ? (
-              <>
-                <Row title="Private journal" hint="Hidden from every summary view" control={<Toggle on />} />
-                <Row title="Analytics" hint="Anonymous product usage" control={<Toggle />} />
-                <Row title="Export all data" hint="JSON archive" control={<Tag>Export</Tag>} />
-                <Row title="Delete account" hint="This cannot be undone" control={<Tag>Delete</Tag>} />
-              </>
-            ) : null}
-          </Panel>
-
-          <Panel delay={0.1}>
-            <PanelHead title="Coming modules" hint="The architecture is already prepared" />
-            <div className="flex flex-wrap gap-2 px-6 pb-6">
-              {["Finance", "Health", "AI Coach", "Reading", "Projects"].map((m) => (
-                <Tag key={m}>{m}</Tag>
-              ))}
-            </div>
           </Panel>
         </div>
       </div>
