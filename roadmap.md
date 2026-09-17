@@ -16,10 +16,10 @@
 - [ ] Calendário (visões dia/semana/mês, filtros, CRUD) — integrações Google/Outlook/Teams bloqueadas sem OAuth
 
 ## Parte 3
-- [ ] Lista de Compras (categorias + integração alimentação)
-- [ ] Experiências
-- [ ] Investimentos (patrimônio, rentabilidade, gráficos)
-- [ ] Cartões (saldo, limite, fatura, gastos por categoria)
+- [x] Lista de Compras (categorias + marcação de comprado)
+- [x] Experiências
+- [x] Investimentos (patrimônio, rentabilidade, distribuição da carteira)
+- [x] Cartões (limite, fatura, vencimento + gastos por categoria)
 
 ## Parte 4
 - [ ] Dashboard novo com Índice BEPACE
