@@ -202,10 +202,10 @@ function Cover() {
             <h2 className="mt-3 text-display text-2xl sm:text-4xl">Eight surfaces, one system.</h2>
           </div>
           <Link
-            to="/knowledge"
+            to="/dashboard"
             className="hidden shrink-0 items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
           >
-            Explore knowledge
+            Ver o painel
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>

@@ -93,12 +93,7 @@ function PricingPage() {
           <span className="rounded-full px-3 py-1.5 text-[11px] font-semibold text-foreground">
             Pricing
           </span>
-          <Link
-            to="/knowledge"
-            className="rounded-full px-3 py-1.5 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Knowledge
-          </Link>
+
           <Link
             to="/auth"
             className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-semibold text-black"
