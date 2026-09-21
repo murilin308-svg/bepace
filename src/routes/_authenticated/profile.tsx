@@ -1,109 +1,132 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AppShell } from "@/components/life/app-shell";
-import {
-  Metric,
-  PageHeader,
-  Panel,
-  PanelHead,
-  Progress,
-  ScoreRing,
-  Sparkline,
-} from "@/components/life/primitives";
-import { goals, habits, lifeScore, notes, travelStats, user } from "@/lib/life-os";
+import { Metric, PageHeader, Panel, PanelHead, Progress } from "@/components/life/primitives";
+import { EditText, FieldLabel } from "@/components/life/editable";
+import { useCollection, useProfile, useUpdateProfile } from "@/lib/db";
 
 export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
     meta: [
-      { title: "Profile — BEPACE" },
+      { title: "Perfil — BEPACE" },
       {
         name: "description",
         content:
-          "Your personal statistics: Life Score history, goals completed, habits active, notes written and countries visited.",
+          "Seus dados, sua jornada e o progresso dos seus objetivos dentro do BEPACE.",
       },
-      { property: "og:title", content: "Profile — BEPACE" },
-      {
-        property: "og:description",
-        content: "The long view of your own evolution.",
-      },
+      { property: "og:title", content: "Perfil — BEPACE" },
+      { property: "og:description", content: "A visão de longo prazo da sua evolução." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ProfilePage,
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Row = Record<string, any>;
+
 function ProfilePage() {
+  const { data: profile } = useProfile();
+  const updateProfile = useUpdateProfile();
+  const { data: vision = [] } = useCollection<Row>("vision_items");
+  const { data: studies = [] } = useCollection<Row>("study_plans");
+  const { data: workouts = [] } = useCollection<Row>("workouts");
+  const { data: experiences = [] } = useCollection<Row>("experiences");
+  const { data: prayers = [] } = useCollection<Row>("prayers");
+  const { data: investments = [] } = useCollection<Row>("investments");
+
+  const name = profile?.full_name ?? "Seu nome";
+  const initials = name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase() ?? "")
+    .join("") || "B";
+
+  const since = profile?.created_at
+    ? new Date(profile.created_at).toLocaleDateString("pt-BR", {
+        month: "long",
+        year: "numeric",
+      })
+    : "—";
+
   return (
     <AppShell>
-      <PageHeader eyebrow="Profile" title={user.name} description={`Member since ${user.memberSince} · ${user.timezone}`} />
+      <PageHeader
+        eyebrow="Perfil"
+        title={name}
+        description={`No BEPACE desde ${since}`}
+      />
 
       <div className="grid gap-4 lg:grid-cols-12">
         <Panel className="lg:col-span-4" raised>
           <div className="flex flex-col items-center px-6 py-8">
             <span className="grid h-20 w-20 place-items-center rounded-full bg-surface-3 text-xl font-semibold">
-              {user.initials}
+              {initials}
             </span>
-            <p className="mt-4 text-base font-semibold tracking-tight">{user.name}</p>
-            <p className="text-xs text-muted-foreground">@{user.handle}</p>
-            <div className="mt-6">
-              <ScoreRing value={lifeScore.current} size={140} />
+            <div className="mt-6 w-full space-y-4">
+              <div>
+                <FieldLabel>Nome completo</FieldLabel>
+                <EditText
+                  value={profile?.full_name ?? ""}
+                  placeholder="Seu nome"
+                  className="text-sm"
+                  onCommit={(v) => updateProfile.mutate({ full_name: v })}
+                />
+              </div>
+              <div>
+                <FieldLabel>Nome de usuário</FieldLabel>
+                <EditText
+                  value={profile?.handle ?? ""}
+                  placeholder="@seuusuario"
+                  className="text-sm"
+                  onCommit={(v) => updateProfile.mutate({ handle: v })}
+                />
+              </div>
+              <div>
+                <FieldLabel>E-mail</FieldLabel>
+                <p className="text-sm text-muted-foreground">{profile?.email ?? "—"}</p>
+              </div>
             </div>
-            <p className="mt-4 text-[11px] text-muted-foreground">
-              Average score this year · 71
-            </p>
           </div>
         </Panel>
 
         <div className="space-y-4 lg:col-span-8">
-          <Panel className="grid grid-cols-2 divide-x divide-y divide-hairline sm:grid-cols-3 sm:divide-y-0" delay={0.05}>
-            <Metric label="Days using BEPACE" value="512" />
-            <Metric label="Goals completed" value="9" />
-            <Metric label="Habits active" value={String(habits.length)} />
-            <Metric label="Notes created" value={String(notes.length * 9)} />
-            <Metric label="Countries visited" value={String(travelStats.countries)} />
-            <Metric label="Consistency" value="82%" />
+          <Panel
+            className="grid grid-cols-2 divide-x divide-y divide-hairline sm:grid-cols-3 sm:divide-y-0"
+            delay={0.05}
+          >
+            <Metric label="Sonhos no mural" value={String(vision.length)} />
+            <Metric label="Planos de estudo" value={String(studies.length)} />
+            <Metric label="Treinos" value={String(workouts.length)} />
+            <Metric label="Experiências" value={String(experiences.length)} />
+            <Metric label="Orações" value={String(prayers.length)} />
+            <Metric label="Ativos" value={String(investments.length)} />
           </Panel>
 
           <Panel delay={0.1}>
-            <PanelHead title="Life Score evolution" hint="Last 7 weeks" />
-            <div className="px-6 pb-6">
-              <Sparkline data={lifeScore.weekly} height={72} />
-              <div className="mt-4 grid gap-4 border-t border-hairline pt-4 sm:grid-cols-2">
-                <div>
-                  <p className="eyebrow">Working well</p>
-                  <ul className="mt-2 space-y-1.5 text-xs text-muted-foreground">
-                    {lifeScore.strengths.map((s) => (
-                      <li key={s}>· {s}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <p className="eyebrow">Needs attention</p>
-                  <ul className="mt-2 space-y-1.5 text-xs text-muted-foreground">
-                    {lifeScore.attention.map((s) => (
-                      <li key={s}>· {s}</li>
-                    ))}
-                  </ul>
-                </div>
+            <PanelHead title="Progresso da visão de futuro" hint="Seus sonhos mapeados" />
+            {vision.length === 0 ? (
+              <p className="px-6 pb-6 text-xs text-muted-foreground">
+                Cadastre itens na Visão de Futuro para acompanhar aqui.
+              </p>
+            ) : (
+              <div className="space-y-3 px-6 pb-6">
+                {vision.map((v) => (
+                  <div key={v['id']}>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span className="truncate text-xs">{v['title']}</span>
+                      <span className="shrink-0 text-[11px] tabular-nums text-muted-foreground">
+                        {Number(v['progress'] ?? 0)}%
+                      </span>
+                    </div>
+                    <div className="mt-1.5">
+                      <Progress value={Number(v['progress'] ?? 0)} />
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-          </Panel>
-
-          <Panel delay={0.15}>
-            <PanelHead title="Objectives progress" />
-            <div className="space-y-3 px-6 pb-6">
-              {goals.map((g) => (
-                <div key={g.id}>
-                  <div className="flex items-baseline justify-between gap-3">
-                    <span className="truncate text-xs">{g.title}</span>
-                    <span className="shrink-0 text-[11px] tabular-nums text-muted-foreground">
-                      {g.progress}%
-                    </span>
-                  </div>
-                  <div className="mt-1.5">
-                    <Progress value={g.progress} accent={g.priority === "High"} />
-                  </div>
-                </div>
-              ))}
-            </div>
+            )}
           </Panel>
         </div>
       </div>
