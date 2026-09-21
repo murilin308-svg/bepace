@@ -22,17 +22,11 @@ import { Route as AuthenticatedComprasRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedEstudosRouteImport } from './routes/_authenticated/estudos'
 import { Route as AuthenticatedExperienciasRouteImport } from './routes/_authenticated/experiencias'
-import { Route as AuthenticatedGoalsRouteImport } from './routes/_authenticated/goals'
-import { Route as AuthenticatedHabitsRouteImport } from './routes/_authenticated/habits'
 import { Route as AuthenticatedInvestimentosRouteImport } from './routes/_authenticated/investimentos'
-import { Route as AuthenticatedJournalRouteImport } from './routes/_authenticated/journal'
-import { Route as AuthenticatedKnowledgeRouteImport } from './routes/_authenticated/knowledge'
-import { Route as AuthenticatedNotesRouteImport } from './routes/_authenticated/notes'
 import { Route as AuthenticatedNoticiasRouteImport } from './routes/_authenticated/noticias'
 import { Route as AuthenticatedOracaoRouteImport } from './routes/_authenticated/oracao'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
-import { Route as AuthenticatedTravelRouteImport } from './routes/_authenticated/travel'
 import { Route as AuthenticatedTreinosRouteImport } from './routes/_authenticated/treinos'
 import { Route as AuthenticatedVisaoRouteImport } from './routes/_authenticated/visao'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
@@ -103,37 +97,12 @@ const AuthenticatedExperienciasRoute =
     path: '/experiencias',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedGoalsRoute = AuthenticatedGoalsRouteImport.update({
-  id: '/goals',
-  path: '/goals',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedHabitsRoute = AuthenticatedHabitsRouteImport.update({
-  id: '/habits',
-  path: '/habits',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedInvestimentosRoute =
   AuthenticatedInvestimentosRouteImport.update({
     id: '/investimentos',
     path: '/investimentos',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedJournalRoute = AuthenticatedJournalRouteImport.update({
-  id: '/journal',
-  path: '/journal',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedKnowledgeRoute = AuthenticatedKnowledgeRouteImport.update({
-  id: '/knowledge',
-  path: '/knowledge',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedNotesRoute = AuthenticatedNotesRouteImport.update({
-  id: '/notes',
-  path: '/notes',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedNoticiasRoute = AuthenticatedNoticiasRouteImport.update({
   id: '/noticias',
   path: '/noticias',
@@ -152,11 +121,6 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedTravelRoute = AuthenticatedTravelRouteImport.update({
-  id: '/travel',
-  path: '/travel',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedTreinosRoute = AuthenticatedTreinosRouteImport.update({
@@ -188,17 +152,11 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/estudos': typeof AuthenticatedEstudosRoute
   '/experiencias': typeof AuthenticatedExperienciasRoute
-  '/goals': typeof AuthenticatedGoalsRoute
-  '/habits': typeof AuthenticatedHabitsRoute
   '/investimentos': typeof AuthenticatedInvestimentosRoute
-  '/journal': typeof AuthenticatedJournalRoute
-  '/knowledge': typeof AuthenticatedKnowledgeRoute
-  '/notes': typeof AuthenticatedNotesRoute
   '/noticias': typeof AuthenticatedNoticiasRoute
   '/oracao': typeof AuthenticatedOracaoRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/settings': typeof AuthenticatedSettingsRoute
-  '/travel': typeof AuthenticatedTravelRoute
   '/treinos': typeof AuthenticatedTreinosRoute
   '/visao': typeof AuthenticatedVisaoRoute
   '/api/chat': typeof ApiChatRoute
@@ -216,17 +174,11 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/estudos': typeof AuthenticatedEstudosRoute
   '/experiencias': typeof AuthenticatedExperienciasRoute
-  '/goals': typeof AuthenticatedGoalsRoute
-  '/habits': typeof AuthenticatedHabitsRoute
   '/investimentos': typeof AuthenticatedInvestimentosRoute
-  '/journal': typeof AuthenticatedJournalRoute
-  '/knowledge': typeof AuthenticatedKnowledgeRoute
-  '/notes': typeof AuthenticatedNotesRoute
   '/noticias': typeof AuthenticatedNoticiasRoute
   '/oracao': typeof AuthenticatedOracaoRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/settings': typeof AuthenticatedSettingsRoute
-  '/travel': typeof AuthenticatedTravelRoute
   '/treinos': typeof AuthenticatedTreinosRoute
   '/visao': typeof AuthenticatedVisaoRoute
   '/api/chat': typeof ApiChatRoute
@@ -246,17 +198,11 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/estudos': typeof AuthenticatedEstudosRoute
   '/_authenticated/experiencias': typeof AuthenticatedExperienciasRoute
-  '/_authenticated/goals': typeof AuthenticatedGoalsRoute
-  '/_authenticated/habits': typeof AuthenticatedHabitsRoute
   '/_authenticated/investimentos': typeof AuthenticatedInvestimentosRoute
-  '/_authenticated/journal': typeof AuthenticatedJournalRoute
-  '/_authenticated/knowledge': typeof AuthenticatedKnowledgeRoute
-  '/_authenticated/notes': typeof AuthenticatedNotesRoute
   '/_authenticated/noticias': typeof AuthenticatedNoticiasRoute
   '/_authenticated/oracao': typeof AuthenticatedOracaoRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
-  '/_authenticated/travel': typeof AuthenticatedTravelRoute
   '/_authenticated/treinos': typeof AuthenticatedTreinosRoute
   '/_authenticated/visao': typeof AuthenticatedVisaoRoute
   '/api/chat': typeof ApiChatRoute
@@ -276,17 +222,11 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/estudos'
     | '/experiencias'
-    | '/goals'
-    | '/habits'
     | '/investimentos'
-    | '/journal'
-    | '/knowledge'
-    | '/notes'
     | '/noticias'
     | '/oracao'
     | '/profile'
     | '/settings'
-    | '/travel'
     | '/treinos'
     | '/visao'
     | '/api/chat'
@@ -304,17 +244,11 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/estudos'
     | '/experiencias'
-    | '/goals'
-    | '/habits'
     | '/investimentos'
-    | '/journal'
-    | '/knowledge'
-    | '/notes'
     | '/noticias'
     | '/oracao'
     | '/profile'
     | '/settings'
-    | '/travel'
     | '/treinos'
     | '/visao'
     | '/api/chat'
@@ -333,17 +267,11 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/estudos'
     | '/_authenticated/experiencias'
-    | '/_authenticated/goals'
-    | '/_authenticated/habits'
     | '/_authenticated/investimentos'
-    | '/_authenticated/journal'
-    | '/_authenticated/knowledge'
-    | '/_authenticated/notes'
     | '/_authenticated/noticias'
     | '/_authenticated/oracao'
     | '/_authenticated/profile'
     | '/_authenticated/settings'
-    | '/_authenticated/travel'
     | '/_authenticated/treinos'
     | '/_authenticated/visao'
     | '/api/chat'
@@ -451,46 +379,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedExperienciasRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/goals': {
-      id: '/_authenticated/goals'
-      path: '/goals'
-      fullPath: '/goals'
-      preLoaderRoute: typeof AuthenticatedGoalsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/habits': {
-      id: '/_authenticated/habits'
-      path: '/habits'
-      fullPath: '/habits'
-      preLoaderRoute: typeof AuthenticatedHabitsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/investimentos': {
       id: '/_authenticated/investimentos'
       path: '/investimentos'
       fullPath: '/investimentos'
       preLoaderRoute: typeof AuthenticatedInvestimentosRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/journal': {
-      id: '/_authenticated/journal'
-      path: '/journal'
-      fullPath: '/journal'
-      preLoaderRoute: typeof AuthenticatedJournalRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/knowledge': {
-      id: '/_authenticated/knowledge'
-      path: '/knowledge'
-      fullPath: '/knowledge'
-      preLoaderRoute: typeof AuthenticatedKnowledgeRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/notes': {
-      id: '/_authenticated/notes'
-      path: '/notes'
-      fullPath: '/notes'
-      preLoaderRoute: typeof AuthenticatedNotesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/noticias': {
@@ -519,13 +412,6 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AuthenticatedSettingsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/travel': {
-      id: '/_authenticated/travel'
-      path: '/travel'
-      fullPath: '/travel'
-      preLoaderRoute: typeof AuthenticatedTravelRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/treinos': {
@@ -561,17 +447,11 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedEstudosRoute: typeof AuthenticatedEstudosRoute
   AuthenticatedExperienciasRoute: typeof AuthenticatedExperienciasRoute
-  AuthenticatedGoalsRoute: typeof AuthenticatedGoalsRoute
-  AuthenticatedHabitsRoute: typeof AuthenticatedHabitsRoute
   AuthenticatedInvestimentosRoute: typeof AuthenticatedInvestimentosRoute
-  AuthenticatedJournalRoute: typeof AuthenticatedJournalRoute
-  AuthenticatedKnowledgeRoute: typeof AuthenticatedKnowledgeRoute
-  AuthenticatedNotesRoute: typeof AuthenticatedNotesRoute
   AuthenticatedNoticiasRoute: typeof AuthenticatedNoticiasRoute
   AuthenticatedOracaoRoute: typeof AuthenticatedOracaoRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
-  AuthenticatedTravelRoute: typeof AuthenticatedTravelRoute
   AuthenticatedTreinosRoute: typeof AuthenticatedTreinosRoute
   AuthenticatedVisaoRoute: typeof AuthenticatedVisaoRoute
 }
@@ -585,17 +465,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedEstudosRoute: AuthenticatedEstudosRoute,
   AuthenticatedExperienciasRoute: AuthenticatedExperienciasRoute,
-  AuthenticatedGoalsRoute: AuthenticatedGoalsRoute,
-  AuthenticatedHabitsRoute: AuthenticatedHabitsRoute,
   AuthenticatedInvestimentosRoute: AuthenticatedInvestimentosRoute,
-  AuthenticatedJournalRoute: AuthenticatedJournalRoute,
-  AuthenticatedKnowledgeRoute: AuthenticatedKnowledgeRoute,
-  AuthenticatedNotesRoute: AuthenticatedNotesRoute,
   AuthenticatedNoticiasRoute: AuthenticatedNoticiasRoute,
   AuthenticatedOracaoRoute: AuthenticatedOracaoRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
-  AuthenticatedTravelRoute: AuthenticatedTravelRoute,
   AuthenticatedTreinosRoute: AuthenticatedTreinosRoute,
   AuthenticatedVisaoRoute: AuthenticatedVisaoRoute,
 }
