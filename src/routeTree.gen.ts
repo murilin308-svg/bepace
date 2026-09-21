@@ -35,6 +35,7 @@ import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedTravelRouteImport } from './routes/_authenticated/travel'
 import { Route as AuthenticatedTreinosRouteImport } from './routes/_authenticated/treinos'
 import { Route as AuthenticatedVisaoRouteImport } from './routes/_authenticated/visao'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -168,6 +169,11 @@ const AuthenticatedVisaoRoute = AuthenticatedVisaoRouteImport.update({
   path: '/visao',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -195,6 +201,7 @@ export interface FileRoutesByFullPath {
   '/travel': typeof AuthenticatedTravelRoute
   '/treinos': typeof AuthenticatedTreinosRoute
   '/visao': typeof AuthenticatedVisaoRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -222,6 +229,7 @@ export interface FileRoutesByTo {
   '/travel': typeof AuthenticatedTravelRoute
   '/treinos': typeof AuthenticatedTreinosRoute
   '/visao': typeof AuthenticatedVisaoRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -251,6 +259,7 @@ export interface FileRoutesById {
   '/_authenticated/travel': typeof AuthenticatedTravelRoute
   '/_authenticated/treinos': typeof AuthenticatedTreinosRoute
   '/_authenticated/visao': typeof AuthenticatedVisaoRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -280,6 +289,7 @@ export interface FileRouteTypes {
     | '/travel'
     | '/treinos'
     | '/visao'
+    | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -307,6 +317,7 @@ export interface FileRouteTypes {
     | '/travel'
     | '/treinos'
     | '/visao'
+    | '/api/chat'
   id:
     | '__root__'
     | '/'
@@ -335,6 +346,7 @@ export interface FileRouteTypes {
     | '/_authenticated/travel'
     | '/_authenticated/treinos'
     | '/_authenticated/visao'
+    | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -343,6 +355,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   PricingRoute: typeof PricingRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -529,6 +542,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedVisaoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -589,6 +609,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   PricingRoute: PricingRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
