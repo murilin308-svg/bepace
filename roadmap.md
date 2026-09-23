@@ -13,7 +13,7 @@
 - [x] Estudos
 - [x] Notícias (preferências de setor + leitura salva; feed automático bloqueado sem NewsAPI)
 - [x] Visão de Futuro (mural com categorias, prazos, imagens e progresso)
-- [ ] Calendário (visões dia/semana/mês, filtros, CRUD) — integrações Google/Outlook/Teams bloqueadas sem OAuth
+- [x] Calendário (semana por categoria, CRUD, filtros) — integrações Google/Outlook/Teams bloqueadas sem OAuth
 
 ## Parte 3
 - [x] Lista de Compras (categorias + marcação de comprado)
@@ -22,10 +22,12 @@
 - [x] Cartões (limite, fatura, vencimento + gastos por categoria)
 
 ## Parte 4
-- [ ] Dashboard novo com Índice BEPACE
-- [ ] Assistente IA no app (Lovable AI)
-- [ ] Configurações (perfil, preferências, integrações, tema, segurança)
-- [ ] Limpeza das rotas antigas (goals/habits/notes/journal/knowledge/travel)
+- [x] Dashboard novo com Índice BEPACE (cinco pilares calculados dos dados reais)
+- [x] Assistente IA no app (chat em streaming com Lovable AI)
+- [x] Configurações (perfil, preferências, integrações, tema, segurança)
+- [x] Perfil real (dados editáveis + progresso da visão de futuro)
+- [x] Limpeza das rotas antigas (goals/habits/notes/journal/knowledge/travel)
+- [ ] Tour de ensino no primeiro acesso
 
 ## Bloqueado / precisa de credenciais do usuário
 - [ ] Google Calendar / Outlook / Teams (OAuth do usuário)
