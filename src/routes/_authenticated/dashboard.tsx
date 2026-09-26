@@ -666,7 +666,7 @@ function Dashboard() {
         <Panel className="lg:col-span-5" delay={0.04}>
           <PanelHead
             title="Índice BEPACE"
-            hint="Média dos cinco pilares, atualizada pelos seus dados"
+            hint="Média dos cinco pilares"
             action={
               <span className="text-2xl font-semibold tabular-nums tracking-tight">{indice}</span>
             }
@@ -687,7 +687,7 @@ function Dashboard() {
         </Panel>
 
         <Panel className="lg:col-span-4" delay={0.08}>
-          <PanelHead title="Investimentos e faturas" hint="Patrimônio, cartões e limite usado" />
+          <PanelHead title="Investimentos e faturas" hint="Patrimônio e faturas" />
           <div className="space-y-4 border-t border-hairline px-6 py-5">
             <div className="flex items-baseline justify-between gap-3">
               <span className="text-xs text-muted-foreground">Investido</span>
