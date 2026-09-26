@@ -1,0 +1,1 @@
+ALTER TABLE public.prayers ADD COLUMN period text NOT NULL DEFAULT 'Manhã';
