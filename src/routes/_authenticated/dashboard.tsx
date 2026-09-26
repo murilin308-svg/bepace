@@ -480,7 +480,7 @@ function Dashboard() {
             )}
             <div className="mt-4">
               <QuickAdd
-                placeholder="Novo compromisso hoje…"
+                placeholder="Novo compromisso…"
                 cta="Agendar"
                 onAdd={(title) =>
                   createEvent.mutate({
@@ -538,7 +538,7 @@ function Dashboard() {
             )}
             <div className="mt-4">
               <QuickAdd
-                placeholder="Novo afazer ou item de lista…"
+                placeholder="Novo afazer…"
                 cta="Adicionar"
                 onAdd={(name) =>
                   createTask.mutate({ name, category: "Outros", quantity: "", done: false })
