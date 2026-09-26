@@ -17,23 +17,9 @@ export const Route = createFileRoute("/_authenticated/oracao")({
   component: PrayerPage,
 });
 
-const CATEGORIES = [
-  "Gratidão",
-  "Família",
-  "Saúde",
-  "Trabalho",
-  "Finanças",
-  "Propósitos",
-  "Proteção",
-] as const;
+const CATEGORIES = PRAYER_CATEGORIES;
 
-const LIBRARY = [
-  { label: "Gratidão pela manhã", values: { title: "Gratidão pela manhã", category: "Gratidão", body: "Obrigado por mais um dia. Que eu use cada hora com propósito.", minutes: 5 } },
-  { label: "Proteção da família", values: { title: "Proteção da família", category: "Família", body: "Guarde os meus, no corpo, na mente e no caminho.", minutes: 5 } },
-  { label: "Sabedoria no trabalho", values: { title: "Sabedoria no trabalho", category: "Trabalho", body: "Dá-me discernimento nas decisões e paciência com as pessoas.", minutes: 5 } },
-  { label: "Saúde e disciplina", values: { title: "Saúde e disciplina", category: "Saúde", body: "Que eu cuide do corpo que me foi confiado.", minutes: 5 } },
-  { label: "Provisão e finanças", values: { title: "Provisão e finanças", category: "Finanças", body: "Que eu administre bem o pouco e o muito.", minutes: 5 } },
-] as const;
+const LIBRARY = PRAYER_LIBRARY;
 
 function PrayerPage() {
   const create = useCreate("prayers");
