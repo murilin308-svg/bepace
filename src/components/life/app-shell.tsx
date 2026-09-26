@@ -117,7 +117,7 @@ function SidebarBody({
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold tracking-tight">BEPACE</p>
             <p className="truncate text-[11px] text-muted-foreground">
-              Sua vida organizada em um único lugar
+              Organização em um só lugar
             </p>
           </div>
         ) : null}
