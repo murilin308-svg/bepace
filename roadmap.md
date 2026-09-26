@@ -23,6 +23,7 @@
 
 ## Parte 4
 - [x] Dashboard novo com Índice BEPACE (cinco pilares calculados dos dados reais)
+- [x] Dashboard reordenado para uso diário: oração → agenda/afazeres/avisos → treino/estudos → índice, finanças e visão
 - [x] Assistente IA no app (chat em streaming com Lovable AI)
 - [x] Configurações (perfil, preferências, integrações, tema, segurança)
 - [x] Perfil real (dados editáveis + progresso da visão de futuro)
