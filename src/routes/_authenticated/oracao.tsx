@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AppShell } from "@/components/life/app-shell";
 import { ModuleBoard, LibraryPicker } from "@/components/life/module-page";
 import { useCreate } from "@/lib/db";
+import { PRAYER_CATEGORIES, PRAYER_LIBRARY } from "@/lib/prayer-library";
 
 export const Route = createFileRoute("/_authenticated/oracao")({
   head: () => ({
