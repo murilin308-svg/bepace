@@ -572,6 +572,7 @@ export type Database = {
           favorite: boolean
           id: string
           minutes: number
+          period: string
           title: string
           updated_at: string
           user_id: string
@@ -583,6 +584,7 @@ export type Database = {
           favorite?: boolean
           id?: string
           minutes?: number
+          period?: string
           title?: string
           updated_at?: string
           user_id: string
@@ -594,6 +596,7 @@ export type Database = {
           favorite?: boolean
           id?: string
           minutes?: number
+          period?: string
           title?: string
           updated_at?: string
           user_id?: string
