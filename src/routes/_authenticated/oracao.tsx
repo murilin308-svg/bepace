@@ -31,10 +31,10 @@ function PrayerPage() {
         table="prayers"
         eyebrow="Espiritualidade"
         title="Oração"
-        description="Sua biblioteca de orações, o tempo dedicado e os pedidos em acompanhamento."
+        description="Defina o horário de cada oração: as da manhã aparecem no painel até 19h, as da noite das 19h à meia-noite. Sua biblioteca de orações, o tempo dedicado e os pedidos em acompanhamento."
         addPlaceholder="Nova oração — ex.: Gratidão pela manhã"
         filterKey="category"
-        defaults={{ category: "Gratidão", body: "", minutes: 5, favorite: false }}
+        defaults={{ period: "Manhã", category: "Gratidão", body: "", minutes: 5, favorite: false }}
         extra={
           <LibraryPicker
             title="Biblioteca de orações prontas"
@@ -43,6 +43,7 @@ function PrayerPage() {
           />
         }
         fields={[
+          { key: "period", label: "Horário", type: "select", options: ["Manhã", "Noite"] },
           { key: "category", label: "Categoria", type: "select", options: CATEGORIES },
           { key: "favorite", label: "Favorita", type: "check" },
           { key: "minutes", label: "Minutos", type: "number", min: 0, max: 600, suffix: "min" },

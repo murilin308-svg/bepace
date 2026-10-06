@@ -60,7 +60,11 @@ const hourLabel = (h: unknown) => `${String(Number(h) || 0).padStart(2, "0")}:00
 /** Data/hora reais só depois da hidratação — evita divergir entre servidor e navegador. */
 function useNow() {
   const [now, setNow] = useState<Date | null>(null);
-  useEffect(() => setNow(new Date()), []);
+  useEffect(() => {
+    setNow(new Date());
+    const t = setInterval(() => setNow(new Date()), 60_000);
+    return () => clearInterval(t);
+  }, []);
   return now;
 }
 
@@ -139,7 +143,8 @@ function Dashboard() {
 
   const dayIndex = now ? (now.getDay() + 6) % 7 : -1;
   const todayName = now ? DAYS_LONG[dayIndex] : undefined;
-  const isMorning = !now || now.getHours() < 12;
+  const isMorning = !now || now.getHours() < 19;
+  const period = isMorning ? "Manhã" : "Noite";
 
   const firstName = (profile?.full_name ?? "").trim().split(" ")[0];
   const greeting = !now
@@ -192,7 +197,10 @@ function Dashboard() {
     [requests],
   );
 
-  const recentPrayers = useMemo(() => prayers.slice(0, 3), [prayers]);
+  const recentPrayers = useMemo(
+    () => prayers.filter((p) => String(p["period"] ?? "Manhã") === period),
+    [prayers, period],
+  );
 
   /* ---------------- avisos ------------------------------------------------- */
   const notices = useMemo<Notice[]>(() => {
@@ -340,6 +348,7 @@ function Dashboard() {
                   body: "",
                   minutes: 5,
                   favorite: false,
+                  period,
                 })
               }
             />
@@ -349,7 +358,7 @@ function Dashboard() {
               {PRAYER_LIBRARY.map((it) => (
                 <button
                   key={it.label}
-                  onClick={() => createPrayer.mutate({ favorite: false, ...it.values })}
+                  onClick={() => createPrayer.mutate({ favorite: false, ...it.values, period })}
                   className="rounded-full border border-hairline bg-surface-2/60 px-3 py-1.5 text-[11px] text-muted-foreground transition-colors hover:border-accent-orange/40 hover:text-foreground"
                 >
                   + {it.label}
@@ -357,10 +366,10 @@ function Dashboard() {
               ))}
             </div>
 
-            <p className="eyebrow mt-6 mb-2">Suas últimas orações</p>
+            <p className="eyebrow mt-6 mb-2">{isMorning ? "Suas orações da manhã" : "Suas orações da noite"}</p>
             {recentPrayers.length === 0 ? (
               <p className="text-xs text-muted-foreground">
-                Nenhuma oração registrada ainda — use um dos atalhos acima.
+                Nenhuma oração para este horário — configure na aba Oração ou use um atalho acima.
               </p>
             ) : (
               <ul className="space-y-1">
