@@ -7,6 +7,7 @@ import { AppShell } from "@/components/life/app-shell";
 import { ModuleBoard } from "@/components/life/module-page";
 import { Button } from "@/components/ui/button";
 import { useCreate } from "@/lib/db";
+import { cn } from "@/lib/utils";
 import { getNews, type NewsArticle } from "@/lib/news.functions";
 
 export const Route = createFileRoute("/_authenticated/noticias")({
@@ -54,8 +55,28 @@ function NoticiasPage() {
   const [section, setSection] = useState(0);
   const [failedImages, setFailedImages] = useState<Set<string>>(() => new Set());
   const [today, setToday] = useState("");
+  const [headerH, setHeaderH] = useState(57);
+  const [compact, setCompact] = useState(false);
   useEffect(() => {
     setToday(new Date().toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long", year: "numeric" }));
+  }, []);
+  // O cabeçalho do jornal gruda logo abaixo do cabeçalho do app e se compacta na rolagem.
+  useEffect(() => {
+    const appHeader = document.querySelector("[data-app-header]");
+    const update = () => setHeaderH(appHeader ? Math.ceil(appHeader.getBoundingClientRect().height) : 57);
+    update();
+    const ro = new ResizeObserver(update);
+    if (appHeader) ro.observe(appHeader);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setCompact((prev) => (prev ? y > 80 : y > 150));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
   const cat = SECTIONS[section]?.value;
   const { data, isLoading } = useQuery({

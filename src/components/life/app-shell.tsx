@@ -215,7 +215,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </AnimatePresence>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-30 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 border-b border-hairline bg-surface-0/85 px-4 py-3 backdrop-blur-xl sm:px-8">
+        <header data-app-header className="sticky top-0 z-30 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 border-b border-hairline bg-surface-0/85 px-4 py-3 backdrop-blur-xl sm:px-8">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setMobileOpen(true)}
