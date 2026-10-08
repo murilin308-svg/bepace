@@ -5,16 +5,17 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { AppShell } from "@/components/life/app-shell";
 import { ModuleBoard } from "@/components/life/module-page";
+import { Button } from "@/components/ui/button";
 import { useCreate } from "@/lib/db";
 import { getNews, type NewsArticle } from "@/lib/news.functions";
 
 export const Route = createFileRoute("/_authenticated/noticias")({
   head: () => ({
     meta: [
-      { title: "Notícias — BEPACE" },
-      { name: "description", content: "Jornal diário em português com as principais notícias, no estilo editorial do BEPACE." },
-      { property: "og:title", content: "Notícias — BEPACE" },
-      { property: "og:description", content: "As principais notícias do dia em português." },
+      { title: "The Bepace News — Notícias do mundo" },
+      { name: "description", content: "The Bepace News: notícias do mundo em português, organizadas por tema, com fotos e fontes originais." },
+      { property: "og:title", content: "The Bepace News — Notícias do mundo" },
+      { property: "og:description", content: "Notícias do mundo em português, organizadas por tema, com fotos e fontes originais." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -63,6 +64,14 @@ function NoticiasPage() {
   });
   const save = useCreate("saved_news");
   const items = data?.items ?? [];
+  const imageUrls = new Set<string>();
+  const illustratedIds = new Set(
+    items.filter((a) => {
+      if (!a.image || imageUrls.has(a.image) || imageUrls.size >= 3) return false;
+      imageUrls.add(a.image);
+      return true;
+    }).map((a) => a.id),
+  );
   const [lead, ...rest] = items;
   const side = rest.slice(0, 4);
   const more = rest.slice(4);
@@ -84,7 +93,7 @@ function NoticiasPage() {
             <span>Edição em português</span>
           </div>
           <h1 className="mt-3 text-5xl leading-none sm:text-7xl" style={MAST}>
-            The BEPACE Times
+            The Bepace News
           </h1>
           <p className="mt-2 text-[11px] italic text-muted-foreground" style={SERIF}>
             “Todas as notícias que importam para o seu dia.”
@@ -92,13 +101,15 @@ function NoticiasPage() {
         </header>
         <nav className="flex flex-wrap justify-center gap-x-5 gap-y-1 border-b border-hairline py-2.5 text-[12px] font-medium" style={SANS}>
           {SECTIONS.map((s, i) => (
-            <button
+            <Button
               key={s.label}
+              variant="ghost"
               onClick={() => setSection(i)}
-              className={i === section ? "text-foreground underline underline-offset-4" : "text-muted-foreground hover:text-foreground"}
+              aria-pressed={i === section}
+              className={`h-auto rounded-none p-0 text-[12px] hover:bg-transparent ${i === section ? "text-foreground underline underline-offset-4" : "text-muted-foreground hover:text-foreground"}`}
             >
               {s.label}
-            </button>
+            </Button>
           ))}
         </nav>
         <div className="border-b-4 border-double border-foreground/60" />
@@ -112,11 +123,11 @@ function NoticiasPage() {
         ) : (
           <>
             <section className="grid gap-8 py-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-              <Story a={lead} big onSave={saveItem} />
+              <Story a={lead} big showImage={illustratedIds.has(lead.id)} onSave={saveItem} />
               <div className="divide-y divide-hairline lg:border-l lg:border-hairline lg:pl-8">
                 {side.map((a) => (
                   <div key={a.id} className="py-4 first:pt-0">
-                    <Story a={a} onSave={saveItem} />
+                    <Story a={a} showImage={illustratedIds.has(a.id)} onSave={saveItem} />
                   </div>
                 ))}
               </div>
@@ -125,7 +136,7 @@ function NoticiasPage() {
               <section className="grid gap-x-8 border-t border-foreground/60 pt-6 sm:grid-cols-2 lg:grid-cols-3">
                 {more.map((a) => (
                   <div key={a.id} className="border-b border-hairline py-4">
-                    <Story a={a} onSave={saveItem} />
+                    <Story a={a} showImage={illustratedIds.has(a.id)} onSave={saveItem} />
                   </div>
                 ))}
               </section>
@@ -165,11 +176,13 @@ function NoticiasPage() {
   );
 }
 
-function Story({ a, big, onSave }: { a: NewsArticle; big?: boolean; onSave: (a: NewsArticle) => void }) {
+function Story({ a, big, showImage, onSave }: { a: NewsArticle; big?: boolean; showImage: boolean; onSave: (a: NewsArticle) => void }) {
   return (
     <div>
-      {big && a.image ? (
-        <img src={a.image} alt="" loading="lazy" className="mb-4 aspect-[16/9] w-full object-cover grayscale-[15%]" onError={(e) => (e.currentTarget.style.display = "none")} />
+      {showImage && a.image ? (
+        <a href={a.link} target="_blank" rel="noopener noreferrer" className="mb-4 block">
+          <img src={a.image} alt={a.title} loading="lazy" className="aspect-[16/9] w-full object-cover grayscale-[15%]" onError={(e) => (e.currentTarget.style.display = "none")} />
+        </a>
       ) : null}
       <a href={a.link} target="_blank" rel="noopener noreferrer" className="group block">
         <h2 className={`${big ? "text-3xl sm:text-[2.6rem] leading-[1.08] font-bold" : "text-lg leading-snug font-semibold"} group-hover:underline decoration-1 underline-offset-4`} style={SERIF}>
@@ -185,7 +198,7 @@ function Story({ a, big, onSave }: { a: NewsArticle; big?: boolean; onSave: (a: 
         <span className="font-semibold text-foreground/80">{a.source}</span>
         <span>{fmtDate(a.date)}</span>
         <a href={a.link} target="_blank" rel="noopener noreferrer" className="hover:text-foreground">Ler original ↗</a>
-        <button onClick={() => onSave(a)} className="hover:text-accent-orange">Salvar</button>
+        <Button variant="ghost" onClick={() => onSave(a)} className="h-auto rounded-none p-0 text-[10.5px] uppercase tracking-wider hover:bg-transparent hover:text-accent-orange">Salvar</Button>
       </div>
     </div>
   );
