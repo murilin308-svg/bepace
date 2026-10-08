@@ -126,21 +126,24 @@ function NoticiasPage() {
 
   return (
     <AppShell>
-      <article className="mx-auto max-w-6xl text-foreground">
-        {/* masthead */}
-        <header className="border-b border-foreground/80 pb-3 text-center">
-          <div className="flex items-center justify-between text-[11px] uppercase tracking-wider text-muted-foreground" style={SANS}>
+      {/* Cabeçalho fixo: o título e as seções acompanham a rolagem. */}
+      <header
+        className={cn("sticky z-20 bg-surface-0/95 backdrop-blur-xl", compact ? "border-b-4 border-double border-foreground/60" : "")}
+        style={{ top: headerH - 1 }}
+      >
+        <div className={cn("mx-auto max-w-6xl", compact ? "" : "border-b border-foreground/80 pb-3")}>
+          <div className={cn("items-center justify-between text-[11px] uppercase tracking-wider text-muted-foreground", compact ? "hidden" : "flex")} style={SANS}>
             <span className="capitalize">{today}</span>
             <span>Edição em português</span>
           </div>
-          <h1 className="mt-3 text-5xl leading-none sm:text-7xl" style={MAST}>
+          <h1 className={cn("text-center leading-none transition-all duration-300", compact ? "py-2 text-[26px] sm:text-[32px]" : "mt-3 text-5xl sm:text-7xl")} style={MAST}>
             The Bepace News
           </h1>
-          <p className="mt-2 text-[11px] italic text-muted-foreground" style={SERIF}>
+          <p className={cn("text-center text-[11px] italic text-muted-foreground", compact ? "hidden" : "mt-2 block")} style={SERIF}>
             “Todas as notícias que importam para o seu dia.”
           </p>
-        </header>
-        <nav className="flex flex-wrap justify-center gap-x-5 gap-y-1 border-b border-hairline py-2.5 text-[12px] font-medium" style={SANS}>
+        </div>
+        <nav className={cn("mx-auto flex max-w-6xl flex-wrap justify-center gap-x-5 gap-y-1 text-[12px] font-medium", compact ? "pt-1 pb-2" : "border-b border-hairline py-2.5")} style={SANS}>
           {SECTIONS.map((s, i) => (
             <Button
               key={s.label}
@@ -153,7 +156,9 @@ function NoticiasPage() {
             </Button>
           ))}
         </nav>
-        <div className="border-b-4 border-double border-foreground/60" />
+        {compact ? null : <div className="border-b-4 border-double border-foreground/60" />}
+      </header>
+      <article className="mx-auto max-w-6xl text-foreground">
 
         {isLoading ? (
           <p className="py-20 text-center italic text-muted-foreground" style={SERIF}>Carregando a edição…</p>
