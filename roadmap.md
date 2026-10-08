@@ -11,7 +11,8 @@
 
 ## Parte 2
 - [x] Estudos
-- [x] Notícias (preferências de setor + leitura salva; feed automático bloqueado sem NewsAPI)
+- [x] Notícias (NewsData.io em português, cache, preferências de setor e leitura salva)
+- [x] Jornal: título “The Bepace News” e três imagens de matérias por tema, substituindo fotos indisponíveis
 - [x] Visão de Futuro (mural com categorias, prazos, imagens e progresso)
 - [x] Calendário (semana por categoria, CRUD, filtros) — integrações Google/Outlook/Teams bloqueadas sem OAuth
 
@@ -33,5 +34,4 @@
 ## Bloqueado / precisa de credenciais do usuário
 - [ ] Google Calendar / Outlook / Teams (OAuth do usuário)
 - [ ] WhatsApp Cloud API (token Meta)
-- [ ] NewsAPI (chave)
 - [ ] Cartões / bancos (não existe API pública aberta — entrada manual ou Open Finance)
