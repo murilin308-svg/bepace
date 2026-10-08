@@ -65,6 +65,7 @@ function NoticiasPage() {
   });
   const save = useCreate("saved_news");
   const items = data?.items ?? [];
+  const imageUrls = new Set<string>();
   // Uma foto no começo, uma no meio e uma no fim — proporcional ao longo da página.
   const usable = items.filter((a) => {
     if (!a.image || failedImages.has(a.image) || imageUrls.has(a.image)) return false;
