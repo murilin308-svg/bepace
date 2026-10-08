@@ -9,4 +9,4 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- News imagery is selected in the news page from three distinct source image URLs, replacing failed images with the next available article image; this keeps photos authentic without extra news API calls.
+- News imagery in the news page shows three distinct source images distributed one near the top (lead), one in the middle, and one near the end of the article list, replacing failed images with the nearest available article image; this keeps photos authentic without extra news API calls.

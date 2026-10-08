@@ -65,14 +65,31 @@ function NoticiasPage() {
   });
   const save = useCreate("saved_news");
   const items = data?.items ?? [];
-  const imageUrls = new Set<string>();
-  const illustratedIds = new Set(
-    items.filter((a) => {
-      if (!a.image || failedImages.has(a.image) || imageUrls.has(a.image) || imageUrls.size >= 3) return false;
-      imageUrls.add(a.image);
-      return true;
-    }).map((a) => a.id),
-  );
+  // Uma foto no começo, uma no meio e uma no fim — proporcional ao longo da página.
+  const usable = items.filter((a) => {
+    if (!a.image || failedImages.has(a.image) || imageUrls.has(a.image)) return false;
+    imageUrls.add(a.image);
+    return true;
+  });
+  const usableIds = new Set(usable.map((a) => a.id));
+  const illustratedIds = new Set<string>();
+  const chooseNear = (target: number) => {
+    if (illustratedIds.size >= 3) return;
+    let bestId: string | null = null;
+    let bestDist = Infinity;
+    items.forEach((a, idx) => {
+      if (!usableIds.has(a.id) || illustratedIds.has(a.id)) return;
+      const dist = Math.abs(idx - target);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestId = a.id;
+      }
+    });
+    if (bestId) illustratedIds.add(bestId);
+  };
+  chooseNear(0);
+  chooseNear(Math.floor(items.length / 2));
+  chooseNear(items.length - 1);
   const [lead, ...rest] = items;
   const side = rest.slice(0, 4);
   const more = rest.slice(4);
