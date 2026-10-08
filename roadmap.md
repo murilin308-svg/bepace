@@ -12,7 +12,7 @@
 ## Parte 2
 - [x] Estudos
 - [x] Notícias (NewsData.io em português, cache, preferências de setor e leitura salva)
-- [ ] Jornal: título “The Bepace News” e três imagens de matérias por tema
+- [x] Jornal: título “The Bepace News” e três imagens de matérias por tema, substituindo fotos indisponíveis
 - [x] Visão de Futuro (mural com categorias, prazos, imagens e progresso)
 - [x] Calendário (semana por categoria, CRUD, filtros) — integrações Google/Outlook/Teams bloqueadas sem OAuth
 
