@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- News imagery is selected in the news page from three distinct source image URLs, replacing failed images with the next available article image; this keeps photos authentic without extra news API calls.

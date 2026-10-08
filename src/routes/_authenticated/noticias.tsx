@@ -52,6 +52,7 @@ function fmtDate(d: string | null) {
 function NoticiasPage() {
   const fetchNews = useServerFn(getNews);
   const [section, setSection] = useState(0);
+  const [failedImages, setFailedImages] = useState<Set<string>>(() => new Set());
   const [today, setToday] = useState("");
   useEffect(() => {
     setToday(new Date().toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long", year: "numeric" }));
@@ -67,7 +68,7 @@ function NoticiasPage() {
   const imageUrls = new Set<string>();
   const illustratedIds = new Set(
     items.filter((a) => {
-      if (!a.image || imageUrls.has(a.image) || imageUrls.size >= 3) return false;
+      if (!a.image || failedImages.has(a.image) || imageUrls.has(a.image) || imageUrls.size >= 3) return false;
       imageUrls.add(a.image);
       return true;
     }).map((a) => a.id),
@@ -75,6 +76,7 @@ function NoticiasPage() {
   const [lead, ...rest] = items;
   const side = rest.slice(0, 4);
   const more = rest.slice(4);
+  const imageFailed = (url: string) => setFailedImages((previous) => new Set([...previous, url]));
 
   const saveItem = (a: NewsArticle) => {
     save.mutate(
@@ -123,11 +125,11 @@ function NoticiasPage() {
         ) : (
           <>
             <section className="grid gap-8 py-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-              <Story a={lead} big showImage={illustratedIds.has(lead.id)} onSave={saveItem} />
+              <Story a={lead} big showImage={illustratedIds.has(lead.id)} onImageError={imageFailed} onSave={saveItem} />
               <div className="divide-y divide-hairline lg:border-l lg:border-hairline lg:pl-8">
                 {side.map((a) => (
                   <div key={a.id} className="py-4 first:pt-0">
-                    <Story a={a} showImage={illustratedIds.has(a.id)} onSave={saveItem} />
+                    <Story a={a} showImage={illustratedIds.has(a.id)} onImageError={imageFailed} onSave={saveItem} />
                   </div>
                 ))}
               </div>
@@ -136,7 +138,7 @@ function NoticiasPage() {
               <section className="grid gap-x-8 border-t border-foreground/60 pt-6 sm:grid-cols-2 lg:grid-cols-3">
                 {more.map((a) => (
                   <div key={a.id} className="border-b border-hairline py-4">
-                    <Story a={a} showImage={illustratedIds.has(a.id)} onSave={saveItem} />
+                    <Story a={a} showImage={illustratedIds.has(a.id)} onImageError={imageFailed} onSave={saveItem} />
                   </div>
                 ))}
               </section>
@@ -176,12 +178,12 @@ function NoticiasPage() {
   );
 }
 
-function Story({ a, big, showImage, onSave }: { a: NewsArticle; big?: boolean; showImage: boolean; onSave: (a: NewsArticle) => void }) {
+function Story({ a, big, showImage, onImageError, onSave }: { a: NewsArticle; big?: boolean; showImage: boolean; onImageError: (url: string) => void; onSave: (a: NewsArticle) => void }) {
   return (
     <div>
       {showImage && a.image ? (
         <a href={a.link} target="_blank" rel="noopener noreferrer" className="mb-4 block">
-          <img src={a.image} alt={a.title} loading="lazy" className="aspect-[16/9] w-full object-cover grayscale-[15%]" onError={(e) => (e.currentTarget.style.display = "none")} />
+          <img src={a.image} alt={a.title} loading="lazy" className="aspect-[16/9] w-full object-cover grayscale-[15%]" onError={(e) => onImageError(e.currentTarget.getAttribute("src") ?? "")} />
         </a>
       ) : null}
       <a href={a.link} target="_blank" rel="noopener noreferrer" className="group block">
