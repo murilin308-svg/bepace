@@ -128,7 +128,7 @@ function NoticiasPage() {
     <AppShell>
       {/* Cabeçalho fixo: o título e as seções acompanham a rolagem. */}
       <header
-        className={cn("sticky z-20 bg-surface-0/95 backdrop-blur-xl", compact ? "border-b-4 border-double border-foreground/60" : "")}
+        className={cn("sticky z-20 bg-surface-0", compact ? "border-b-4 border-double border-foreground/60" : "")}
         style={{ top: headerH - 1 }}
       >
         <div className={cn("mx-auto max-w-6xl", compact ? "" : "border-b border-foreground/80 pb-3")}>
