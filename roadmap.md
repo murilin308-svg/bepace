@@ -31,7 +31,13 @@
 - [x] Limpeza das rotas antigas (goals/habits/notes/journal/knowledge/travel)
 - [ ] Tour de ensino no primeiro acesso
 
+## WhatsApp — comandos por mensagem
+- [ ] Conectar o WhatsApp Business ao BEPACE
+- [ ] Vincular com segurança o número à conta e registrar compromissos com data e horário
+- [ ] Receber mensagens, confirmar registros e guardar estados de entrega
+- [ ] Publicar o receptor, selecionar o destino de mensagens e testar um compromisso real
+
 ## Bloqueado / precisa de credenciais do usuário
 - [ ] Google Calendar / Outlook / Teams (OAuth do usuário)
-- [ ] WhatsApp Cloud API (token Meta)
+- [ ] WhatsApp Business (conexão e ativação pela Meta)
 - [ ] Cartões / bancos (não existe API pública aberta — entrada manual ou Open Finance)
