@@ -200,3 +200,99 @@
   text-transform: uppercase;
   color: var(--muted-foreground);
 }
+
+/* Authentication — restrained, full-width two-panel composition. */
+.auth-stage {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+  letter-spacing: 0;
+}
+.auth-layout {
+  width: 100%;
+  max-width: 1120px;
+  min-height: 690px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.auth-identity {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px 24px;
+  overflow: hidden;
+}
+.auth-identity::before,
+.auth-identity::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  background: var(--hairline);
+}
+.auth-identity::before {
+  width: 1px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+}
+.auth-identity::after {
+  height: 1px;
+  width: 100%;
+  left: 0;
+  top: 50%;
+}
+.auth-emblem {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180px;
+  height: 180px;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.auth-panel {
+  position: relative;
+  border-radius: 8px;
+  padding: 32px 24px 24px;
+}
+.auth-mode-link {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+.auth-form {
+  min-height: 634px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 155px;
+}
+.auth-actions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 48px;
+}
+.auth-submit {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  padding: 0;
+  font-size: 10px;
+  font-weight: 600;
+}
+@media (max-width: 767px) {
+  .auth-stage { padding: 24px 20px; align-items: flex-start; }
+  .auth-layout { grid-template-columns: 1fr; min-height: auto; gap: 24px; }
+  .auth-identity { min-height: 180px; padding: 0; }
+  .auth-identity > span:last-child { display: none; }
+  .auth-emblem { width: 100px; height: 100px; top: 62%; }
+  .auth-panel { padding: 24px; }
+  .auth-form { min-height: 420px; padding-top: 70px; }
+  .auth-submit { width: 72px; height: 72px; }
+}
