@@ -29,6 +29,7 @@
 - [x] Configurações (perfil, preferências, integrações, tema, segurança)
 - [x] Perfil real (dados editáveis + progresso da visão de futuro)
 - [x] Limpeza das rotas antigas (goals/habits/notes/journal/knowledge/travel)
+- [x] Capa de marketing removida: / abre direto o login (ou o painel, se já entrar)
 - [ ] Tour de ensino no primeiro acesso
 
 ## WhatsApp — comandos por mensagem
